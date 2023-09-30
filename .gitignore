@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /public/uploads
+/backend/media
 
 # testing
 /coverage
