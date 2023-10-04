@@ -314,7 +314,7 @@ export const AdminNews = () => {
                           <img
                             width={"60"}
                             height={"60"}
-                            src="images/dummy-image-square.png"
+                            src={`${baseurl}/media/images/dummy-image-square.png`}
                             alt=""
                           />
                         )}{" "}

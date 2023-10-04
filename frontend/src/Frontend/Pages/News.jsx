@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import Title from "../../Common/Title";
 import { Link } from "react-router-dom";
-import { removeActiveClass } from "../../util/ulrUtil";
+import { getBaseURL, removeActiveClass } from "../../util/ulrUtil";
 
 const News = ({ item, dateFormat, articleHandler }) => {
+  const baseURL = getBaseURL();
   useEffect(() => {
     removeActiveClass();
   }, []);
@@ -14,7 +15,7 @@ const News = ({ item, dateFormat, articleHandler }) => {
     >
       {item.imageUrls.length > 0 ? (
         <img
-          src={item.imageUrls[0]}
+          src={`${baseURL}${item.imageUrls[0]}`}
           alt=""
           className="w-100"
           height="100"
@@ -24,7 +25,7 @@ const News = ({ item, dateFormat, articleHandler }) => {
         <img
           className="w-100 noImg"
           height={"100"}
-          src="images/dummy-image-square.png"
+          src={`${baseURL}/media/images/dummy-image-square.png`} 
           alt=""
         />
       )}

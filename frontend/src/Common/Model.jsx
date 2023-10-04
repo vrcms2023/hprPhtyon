@@ -1,7 +1,9 @@
 import React from "react";
+import { getBaseURL } from "../util/ulrUtil";
 
 const Model = ({ obj, closeModel, privacy, flag }) => {
-  // const { newstitle, imageUrls, description, } = obj;
+  const { newstitle, imageUrls, description, } = obj;
+  const baseURL = getBaseURL();
   // const { dec, title, cr, crm } = privacy;
 
   // const newImages = obj.imageUrls.length > 0 ? (
@@ -47,7 +49,7 @@ const Model = ({ obj, closeModel, privacy, flag }) => {
                   <hr className="m-0" />
                   {obj.imageUrls.map((img, i) => (
                     <img
-                      src={img}
+                      src={`${baseURL}${img}`}
                       key={i}
                       alt=""
                       className={`me-2 mt-2 newsImg`}

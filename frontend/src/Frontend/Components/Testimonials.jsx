@@ -7,10 +7,11 @@ import rightArrow from "../../Images/right.png";
 import testimonialUser from "../../Images/testimonial.jpg";
 
 import "./Testimonials.css";
+import { getBaseURL } from "../../util/ulrUtil";
 
 const Testimonials = ({ testimonis }) => {
   const [index, setIndex] = useState(0);
-
+  const baseURL = getBaseURL()
   useEffect(() => {
     if (testimonis.length > 1) {
       const lastIndex = testimonis?.length - 1;
@@ -58,7 +59,7 @@ const Testimonials = ({ testimonis }) => {
           <i className="fa fa-user text-white" aria-hidden="true"></i>
         ) : (
           <img
-            src={imageUrl}
+            src={`${baseURL}${imageUrl}`}
             className="rounded-circle my-4 testimonialImg"
             alt="User"
           />

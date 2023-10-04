@@ -1,6 +1,7 @@
 import React from "react";
 import { getImagesByDate } from "../../util/dataFormatUtil";
 import "./Gallery.css";
+import { getBaseURL } from "../../util/ulrUtil";
 
 const GalleryImgThumb = ({
   imgs,
@@ -9,6 +10,7 @@ const GalleryImgThumb = ({
   projectID,
 }) => {
   const imagesByDate = getImagesByDate(imgs);
+  const baseURL = getBaseURL()
 
   return (
     <>
@@ -21,7 +23,7 @@ const GalleryImgThumb = ({
               <>
                 {imagesByDate[dt].map((img) => (
                   <img
-                    src={img.path}
+                    src={`${baseURL}${img.path}`}
                     key={img.id}
                     alt=" "
                     onClick={() => findThumbHandler(projectID, img.id)}

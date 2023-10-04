@@ -3,17 +3,20 @@ import Title from "../../../Common/Title";
 import HomeImg from "../../../Images/project1.png";
 import { getCookie } from "../../../util/cookieUtil";
 import { useNavigate } from "react-router-dom";
+import { getBaseURL } from "../../../util/ulrUtil";
 
 const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
   const navigate = useNavigate();
   // console.log("home tab", projectImages[0].imgs[0])
   const { aboutstitle, aboutussubtitle, description, projectTitle } = project;
 
+  const baseURL = getBaseURL()
+
   const downloadPDF = (path, name) => {
     if (getCookie("clientInformation") !== undefined) {
       const link = document.createElement("a");
       link.download = name;
-      link.href = path;
+      link.href = baseURL+path;
       link.click();
     } else {
       navigate(`/contact`);
@@ -56,7 +59,7 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
 
       <div className="text-center my-5">
         <img
-          src={isProjectImg ? projectImages[0].imgs[0].path : HomeImg}
+          src={isProjectImg ? (`${baseURL}${projectImages[0].imgs[0].path}`) : HomeImg}
           className="rounded img-fluid w-50"
           alt="..."
         />
