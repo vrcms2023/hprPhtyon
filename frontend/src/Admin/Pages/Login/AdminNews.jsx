@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 import { getCookie } from "../../../util/cookieUtil";
 import Error from "../../Components/Error";
 import { sortByDate } from "../../../util/dataFormatUtil";
+import { getBaseURL } from "../../../util/ulrUtil";
+
 
 export const AdminNews = () => {
   const navigate = useNavigate();
@@ -24,10 +26,15 @@ export const AdminNews = () => {
   const [editState, setEditState] = useState(false);
   const [id, setID] = useState("");
   const [userName, setUserName] = useState("");
+  const baseurl = getBaseURL()
 
   useEffect(() => {
     setUserName(getCookie("userName"));
   }, []);
+
+  const generateUUID = () => {
+    return uuidv4();
+  }
 
   const changeHandler = (e) => {
     setErrorMessage("");
@@ -36,7 +43,11 @@ export const AdminNews = () => {
 
   const cancelHandler = () => {
     setnewsState(newsKeys);
+    setNewProject({
+      id: generateUUID(),
+    })
     setEditState(false);
+    setNewsObject([])
   };
 
   const [newsList, setNewsList] = useState([]);
@@ -104,6 +115,9 @@ export const AdminNews = () => {
         );
         setEditState(false);
         setnewsState(newsKeys);
+        setNewProject({
+          id: generateUUID(),
+        })
         setNewsObject([]);
         getNewList();
       } else {
@@ -130,7 +144,11 @@ export const AdminNews = () => {
       newstitle: newstitle,
       description: description,
     };
-    setNewProject({ id: projectID });
+    const newsObject = {
+      id : projectID,
+      category : 'news'
+    }
+    setNewProject(newsObject);
     setnewsState(newsObj);
     setEditState(true);
     setID(id);
@@ -167,7 +185,7 @@ export const AdminNews = () => {
           <DeleteDialog
             onClose={onClose}
             callback={deleteSelectedNews}
-            projectName={news.newstitle}
+            message={`deleting the ${news.newstitle} news?`}
           />
         );
       },
@@ -284,12 +302,14 @@ export const AdminNews = () => {
                       <td>
                         {" "}
                         {news?.imageUrls.length > 0 ? (
+                          <>
                           <img
                             width={"60"}
                             height={"60"}
-                            src={`${news.imageUrls[0]}`}
+                            src={`${baseurl}${news.imageUrls[0]}`}
                             alt=" "
-                          />
+                          /> {news?.imageUrls.length > 1 ? `+${news?.imageUrls.length - 1}` : ''}
+                          </>
                         ) : (
                           <img
                             width={"60"}

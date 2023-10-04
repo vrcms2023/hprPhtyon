@@ -12,6 +12,8 @@ def upload_path(instance, filename):
     return f"images/{now:%Y%m%d%H%M%S}{milliseconds}{extension}"
 
 
+
+
 class Gallery(models.Model):
     id =            models.UUIDField(primary_key=True, default = uuid.uuid4, unique=True, editable=False)
     projectID =     models.CharField(max_length=100, null=False)

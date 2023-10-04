@@ -2,16 +2,12 @@ import React from "react";
 import "./DeleteDialog.css";
 
 const DeleteDialog = (props) => {
-  const { onClose, callback, projectName, label, message } = props;
+  const { onClose, callback, label, message } = props;
   return (
     <div className="popup-overlay d-flex justify-content-center align-items-center flex-column">
       <h3>Are you sure?</h3>
       <p className="text-muted m-0">
-        {message
-          ? message
-          : label
-          ? label
-          : `for deleting the ${projectName} project?`}
+        {message }
       </p>
       <div>
         <hr className="mb-4" />

@@ -44,7 +44,7 @@ const CatageoryImgC = ({
     }
   }, [project]);
 
-  const thumbDelete = (id) => {
+  const thumbDelete = (id, name) => {
     const deleteImageByID = async () => {
       const response = await axiosServiceApi.delete(
         `api/v1/gallery/deleteGalleryImage/${id}/`,
@@ -56,7 +56,7 @@ const CatageoryImgC = ({
     };
     confirmAlert({
       customUI: ({ onClose }) => {
-        return <DeleteDialog onClose={onClose} callback={deleteImageByID} />;
+        return <DeleteDialog onClose={onClose} callback={deleteImageByID} message={`deleting the ${name} image?`}/>;
       },
     });
   };
@@ -98,7 +98,7 @@ const CatageoryImgC = ({
                       >
                         {item.originalname}
                       </a>
-                      <span onClick={() => thumbDelete(item.id)}>
+                      <span onClick={() => thumbDelete(item.id, item.originalname)}>
                         <i
                           className="fa fa-trash-o fs-4 text-danger"
                           aria-hidden="true"
@@ -110,7 +110,7 @@ const CatageoryImgC = ({
                   <div
                     className="categoryContainer"
                     key={item.id}
-                    onClick={() => thumbDelete(item.id)}
+                    onClick={() => thumbDelete(item.id, item.originalname)}
                   >
                     <img
                       className={cssClass}

@@ -14,4 +14,4 @@ urlpatterns = [
     path('getSelectedImagesById/', GetImagesView.as_view({'get': 'list'}), name="get-image"),
     path('updateGalleryDetails/<pk>/', UpdateGalleryViewSet.as_view({'patch': 'update'}), name="update-image"),
     path('deleteGalleryImage/<pk>/', DeleteImageGalleryViewSet.as_view({'delete': 'destroy'}), name="delete-image"),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

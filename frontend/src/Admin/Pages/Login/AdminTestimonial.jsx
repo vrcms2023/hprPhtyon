@@ -20,9 +20,7 @@ import { getBaseURL } from "../../../util/ulrUtil";
 export const AdminTestimonial = () => {
   const navigate = useNavigate();
   const [testimonialObject, setTestimonialObject] = useState([]);
-  const [testimonialProject, setTestimonialProject] = useState({
-    id: uuidv4(),
-  });
+  const [testimonialProject, setTestimonialProject] = useState({id :uuidv4()});
   const testimonialKeys = { title: "", description: "" };
   const [testimonialState, setTestimonialState] = useState(testimonialKeys);
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,6 +29,7 @@ export const AdminTestimonial = () => {
   const [userName, setUserName] = useState("");
   const [disabledFile, setDisabledFile] = useState(false);
   const baseurl = getBaseURL()
+
 
   useEffect(() => {
     setUserName(getCookie("userName"));
@@ -44,9 +43,17 @@ export const AdminTestimonial = () => {
     });
   };
 
+  const generateUUID = () => {
+    return uuidv4();
+  }
+
   const cancelHandler = () => {
     setTestimonialState(testimonialKeys);
+    setTestimonialProject({
+      id: generateUUID(),
+    })
     setEditState(false);
+    setTestimonialObject([]);
   };
 
   const [testimonialList, setTestimonialList] = useState([]);
@@ -120,6 +127,7 @@ export const AdminTestimonial = () => {
         );
         setEditState(false);
         setTestimonialState(testimonialKeys);
+        setTestimonialProject({id: generateUUID()})
         setTestimonialObject([]);
         getTestimonialList();
       } else {
@@ -132,7 +140,7 @@ export const AdminTestimonial = () => {
 
  
 
-  const handleNewsEdit = (event, testimonial) => {
+  const handleTestimonialEdit = (event, testimonial) => {
     event.preventDefault();
     const {
       imageId,
@@ -148,7 +156,11 @@ export const AdminTestimonial = () => {
       title: title,
       description: description,
     };
-    setTestimonialProject({ id: projectID });
+    const galleryObj = {
+      id : projectID,
+      category : 'testimonial'
+    }
+    setTestimonialProject(galleryObj);
     setTestimonialState(testimonialObj);
     setEditState(true);
     setID(id);
@@ -184,7 +196,8 @@ export const AdminTestimonial = () => {
           <DeleteDialog
             onClose={onClose}
             callback={deleteSelectedNews}
-            projectName={testimonial.title}
+            message={`deleting the ${testimonial.title} testimonial?`}
+
           />
         );
       },
@@ -253,8 +266,8 @@ export const AdminTestimonial = () => {
                 disabledFile={disabledFile}
                 descriptionTitle=""
                 showDescription={false}
+                maxFiles={1}
               />
-
               <CatageoryImgC
                 title={`Testimonial Image`}
                 catategoryImgs={testimonialObject}
@@ -318,7 +331,7 @@ export const AdminTestimonial = () => {
                           <img
                             width={"60"}
                             height={"60"}
-                            src={`/static/media/dummy-image-square.png`}
+                            src="images/dummy-image-square.png"
                             alt=""
                           />
                         )}{" "}
@@ -326,7 +339,7 @@ export const AdminTestimonial = () => {
                       <td className="valign-middle">
                         <Link
                           onClick={(event) =>
-                            handleNewsEdit(event, testimonial)
+                            handleTestimonialEdit(event, testimonial)
                           }
                         >
                           <i

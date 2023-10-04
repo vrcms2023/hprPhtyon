@@ -289,12 +289,12 @@ const [tempFile, setTempFile] = useState();
 
     try{
       const [projects, amenitie, specification, updateSpecification] = await Promise.all(url)
-      console.log({
-        projects : projects,
-        amenitie : amenitie,
-        specification :specification,
-        updateSpecification:updateSpecification
-      })
+      // console.log({
+      //   projects : projects,
+      //   amenitie : amenitie,
+      //   specification :specification,
+      //   updateSpecification:updateSpecification
+      // })
       const project = projects?.data?.project;
       toast.success(`${project.projectTitle} Project Update`);
       setProjectName(project.projectTitle);
@@ -344,7 +344,9 @@ const [tempFile, setTempFile] = useState();
           <DeleteDialog
             onClose={onClose}
             callback={publishProject}
-            projectName={'you wish to publish the project without savign your changes'}
+            message={`you wish to ${projectPublish ?  "unPublished" : "published"} the project without savign your changes`}
+            label = {projectPublish ?  "unPublished" : "published"}
+
           />
         );
       },
@@ -675,7 +677,7 @@ const [tempFile, setTempFile] = useState();
                       <textarea
                         className="form-control"
                         name="description"
-                        value={aboutUs.description}
+                        value={aboutUs.description ? aboutUs.description : ''}
                         onChange={changeHandler}
                         id="projectDescription"
                         rows="3"
@@ -702,7 +704,7 @@ const [tempFile, setTempFile] = useState();
                       galleryState={pdfObject}
                       validTypes="application/pdf"
                       descriptionTitle="PDF Description"
-                      showDescription={true}
+                      showDescription={false}
                       buttonLable="Upload PDF"
                     />
                     <CatageoryImgC
@@ -727,7 +729,7 @@ const [tempFile, setTempFile] = useState();
                       galleryState={planObject}
                       validTypes="image/png,image/jpeg"
                       descriptionTitle="Plan Description"
-                      showDescription={true}
+                      showDescription={false}
                       buttonLable="Upload Plan"
                     />
                     <CatageoryImgC
@@ -752,7 +754,7 @@ const [tempFile, setTempFile] = useState();
                       galleryState={availabileObject}
                       validTypes="image/png,image/jpeg,application/pdf"
                       descriptionTitle="Available Description"
-                      showDescription={true}
+                      showDescription={false}
                       buttonLable="Upload Availability"
                     />
                     <CatageoryImgC
@@ -778,7 +780,7 @@ const [tempFile, setTempFile] = useState();
                       galleryState={priceObject}
                       validTypes="image/png,image/jpeg,application/pdf"
                       descriptionTitle="Price Description"
-                      showDescription={true}
+                      showDescription={false}
                       buttonLable="Upload Price Details"
                     />
                     <CatageoryImgC
@@ -848,7 +850,7 @@ const [tempFile, setTempFile] = useState();
                       cols={40}
                       className="form-control"
                       name="imageDescription"
-                      value={aboutUs.imageDescription}
+                      value={aboutUs.imageDescription ? aboutUs.imageDescription : ''}
                       onChange={changeHandler}
                       id="imageDescription"
                     />

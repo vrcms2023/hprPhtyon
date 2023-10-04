@@ -28,10 +28,10 @@ export const getImagesByDate = (img) => {
   const imgByDate = [];
   const sortedImageArray = img.sort(
     (a, b) =>
-      new moment(b.updatedAt).valueOf() - new moment(a.updatedAt).valueOf(),
+      new moment(b.updated_at).valueOf() - new moment(a.updated_at).valueOf(),
   );
   sortedImageArray.map((img) => {
-    const dt = new moment(img.updatedAt).format("YYYY/DD/MM");
+    const dt = new moment(img.updated_at).format("YYYY/DD/MM");
     if (!imgByDate[dt]) {
       imgByDate[dt] = [];
     }

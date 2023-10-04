@@ -5,14 +5,14 @@
 /.pnp
 .pnp.js
 /public/uploads
-/backend/media
+/backend/media/
 
 # testing
 /coverage
 
 # production
 /build
-/media
+/media/
 
 # misc
 .DS_Store

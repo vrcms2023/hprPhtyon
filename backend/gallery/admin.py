@@ -5,4 +5,4 @@ from .models import *
 
 @admin.register(Gallery)
 class AddSpecifications(admin.ModelAdmin):
-    list_display =("projectID", "path")
+    list_display =("projectID", "path", "category")

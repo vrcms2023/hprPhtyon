@@ -131,6 +131,9 @@ const Specifications = ({
                 </tr>
               ))
             ) : (
+              <tr><td>
+                
+               
               <div className="d-flex justify-content-center align-items-center flex-column">
                 <Button
                   type="submit"
@@ -142,6 +145,7 @@ const Specifications = ({
                   "Click on button to add specifications"
                 </p>
               </div>
+              </td></tr>
             )}
           </tbody>
         </table>

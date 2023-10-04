@@ -60,7 +60,7 @@ export const Amenities = ({ title, value, amenities, setAmenities, name }) => {
         <textarea
           className="form-control"
           name={name}
-          value={value}
+          value={value ? value : ''}
           onChange={(e) => handleChange(e)}
           id="amenitiesDescription"
           rows="3"

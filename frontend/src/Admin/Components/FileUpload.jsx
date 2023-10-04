@@ -29,6 +29,7 @@ const FileUpload = ({
   disabledFile = false,
   descriptionTitle,
   showDescription = false,
+  maxFiles,
   buttonLable
 }) => {
   const [files, setFiles] = useState([]);
@@ -43,20 +44,20 @@ const FileUpload = ({
     setExtTypes(extArr);
   }, [validTypes]);
 
-  // const onprocessfile = (error, file) => {
-  //   if (!error) {
-  //     const response = JSON.parse(file.serverId);
-  //     const imageResponse = response.imageModel;
-  //     const img = {
-  //       id: imageResponse.id,
-  //       originalname: imageResponse.originalname,
-  //       path: imageResponse.path,
-  //       contentType: imageResponse.contentType,
-  //     };
-  //     gallerysetState([...galleryState, img]);
-  //     setFiles([]);
-  //   }
-  // };
+  const onprocessfile = (error, file) => {
+    if (!error) {
+      const response = JSON.parse(file.serverId);
+      const imageResponse = response.imageModel;
+      const img = {
+        id: imageResponse.id,
+        originalname: imageResponse.originalname,
+        path: imageResponse.path,
+        contentType: imageResponse.contentType,
+      };
+      gallerysetState([...galleryState, img]);
+      setFiles([]);
+    }
+  };
 
   useEffect(()=>{
     if(files.length > 0 && !showDescription){
@@ -66,39 +67,47 @@ const FileUpload = ({
   },[files,showDescription])
 
   const uploadFile = async() =>{
-    
-    let formData = new FormData()
-    formData.append('path', files[0].file)
-    formData.append('projectID', project?.id);
-    formData.append('category', category);
-    formData.append('imageTitle', '');
-    formData.append('imageDescription', imageDescription);
-    formData.append('created_by', getCookie("userName"));
-    formData.append('updated_By', getCookie("userName"));
+    const arrURL = [];
 
+    files.forEach((element, index) => {
+      let formData = new FormData()
+      formData.append('path', element.file)
+      formData.append('projectID', project?.id);
+      formData.append('category', category);
+      formData.append('imageTitle', '');
+      formData.append('imageDescription', imageDescription);
+      formData.append('created_by', getCookie("userName"));
+      formData.append('updated_By', getCookie("userName"));
 
-    try{
-      const response = await axiosFileUploadServiceApi.post(`api/v1/gallery/createGallery/`,formData);
-      if(response.status === 201){
-        updatedFileChnages(response.data)
-      }
-    }catch(error) {
+      arrURL.push(axiosFileUploadServiceApi.post(`api/v1/gallery/createGallery/`,formData));
+
+    });
+    try {
+      await Promise.all(arrURL).then(function (values) {
+        updatedFileChnages(values)
+      });
+    } catch (error) {
       console.log(error)
     }
+
   }
 
-  const updatedFileChnages = (data)=>{
-    
-      const imageResponse = data.imageModel;
-      const img = {
-        id: imageResponse.id,
-        originalname: imageResponse.originalname,
-        path: imageResponse.path,
-        contentType: imageResponse.contentType,
-      };
-      gallerysetState([...galleryState, img]);
-      setFiles([]);
+  const updatedFileChnages = (response)=>{
+      const imgarr = []
+      response.forEach((item, i) => {
+          const imageResponse = item.data.imageModel;
+          const img = {
+            id: imageResponse.id,
+            originalname: imageResponse.originalname,
+            path: imageResponse.path,
+            contentType: imageResponse.contentType,
+          };
+          imgarr.push(img)
+      })
+
+      gallerysetState([...galleryState, ...imgarr]);
       setimageDescription('')
+      setFiles([]);
   }
 
 
@@ -118,6 +127,7 @@ const FileUpload = ({
       <div className="border border-3 mb-4 shadow-lg">
         {/* <label htmlFor="addImages" className="form-label  ">Add Image's</label> */}
         {/* <input className="form-control" type="file" id="addImages" multiple />  */}
+        
         <FilePond
             labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
             labelInvalidField="invalid files"
@@ -126,13 +136,13 @@ const FileUpload = ({
             onerror={onerror}
             onupdatefiles={setFiles}
             allowMultiple={true}
-            maxFiles={4}
+            maxFiles={maxFiles ? maxFiles :4}
             maxParallelUploads={4}
             disabled={disabledFile}
             credits={false}
             acceptedFileTypes={extTypes}
             instantUpload={false}/>
-             
+          
         {/* <FilePond
           name="path"
           files={files}
@@ -145,12 +155,12 @@ const FileUpload = ({
           disabled={disabledFile}
           credits={false}
           acceptedFileTypes={extTypes}
-          instantUpload={false}
+          instantUpload={true}
           server=
           {
             {
               process:{
-                url: `${backendURL}/api/v1/gallery/createGallery/`,
+                url: `${backendURL}/api/v1/gallery/createGallerys/`,
                 ondata: (formData) => {
                   formData.append('projectID', project?.id);
                   formData.append('category', category);
@@ -171,6 +181,7 @@ const FileUpload = ({
           labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
           labelInvalidField="invalid files"
         /> */}
+    
       </div>
       {showDescription ? (
       <div className="py-3">
