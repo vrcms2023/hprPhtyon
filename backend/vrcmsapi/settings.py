@@ -34,7 +34,7 @@ else:
     print("debug not workig")
 
 #ALLOWED_HOSTS = ['jettik8s.xyz', '127.0.0.1']
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'cms.hprinfra.com']
 
 mimetypes.add_type("text/css", ".css", True)
 
@@ -221,11 +221,11 @@ DJOSER = {
 
 CORS_ORIGIN_ALLOW_ALL  = True
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://192.168.29.99:3000']
+#CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://192.168.29.99:3000']
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://192.168.29.99:3000"]
+#CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://192.168.29.99:3000"]
 
 
-#CSRF_TRUSTED_ORIGINS = ['https://jettik8s.xyz']
+CSRF_TRUSTED_ORIGINS = ['https://cms.hprinfra.com']
 
-#CORS_ALLOWED_ORIGINS = ['https://jettik8s.xyz']
+CORS_ALLOWED_ORIGINS = ['https://cms.hprinfra.com']
