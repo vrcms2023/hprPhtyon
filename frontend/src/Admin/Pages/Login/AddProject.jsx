@@ -327,7 +327,7 @@ const [tempFile, setTempFile] = useState();
         isActive : true
       }
       const response = await axiosServiceApi.patch(
-        `/api/v1/project/publishProject/${id}/`, data
+        `/api/v1/project/publishProject/${newProject.id}/`, data
       );
       if (response.status === 200) {
         const publisher = JSON.parse(response.data.project.publish);
