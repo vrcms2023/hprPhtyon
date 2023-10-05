@@ -1,9 +1,11 @@
 import React from "react";
 import "./DynamicCarousel.css";
+import { getBaseURL } from "../../util/ulrUtil";
 
 const DCarousel = ({ obj, all, closeCarousel }) => {
   const findImg = all.find((item) => item.id === obj.id);
   const imgs = [findImg, ...all];
+  const baseURL= getBaseURL()
 
   const uniqueImgsArray = imgs.filter(function (item, pos) {
     return imgs.indexOf(item) === pos;
@@ -28,7 +30,7 @@ const DCarousel = ({ obj, all, closeCarousel }) => {
                 className={`carousel-item ${index === 0 ? "active" : ""}`}
                 key={item.id}
               >
-                <img src={item.path} className="d-block" alt="..." />
+                <img src={`${baseURL}${item.path}`} className="d-block" alt="..." />
               </div>
             ))
           : null}

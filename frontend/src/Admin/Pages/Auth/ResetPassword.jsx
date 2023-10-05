@@ -13,7 +13,7 @@ const ResetPassword = () => {
     const body = JSON.stringify(email);
     try {
       const data = await axiosClientServiceApi.post(
-        `api/v1/user/auth/users/reset_password/`,
+        `/user/auth/users/reset_password/`,
         body,
       );
       if (data.status == 204) {

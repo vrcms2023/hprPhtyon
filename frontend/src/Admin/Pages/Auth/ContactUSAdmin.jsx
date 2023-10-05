@@ -17,7 +17,7 @@ const ContactUSAdmin = () => {
    */
   const getAllUserDetails = async () => {
     try {
-      const response = await axiosServiceApi.get(`api/v1/contactus/`);
+      const response = await axiosServiceApi.get(`/contactus/`);
       if (response?.status == 200 && response.data?.contactus?.length > 0) {
         setUserDetails(response.data.contactus);
       } else {

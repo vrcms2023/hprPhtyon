@@ -24,6 +24,7 @@ const ProjectTabs = () => {
   const [projectHome, setProjectHome] = useState({});
   const [specifications, setSpecifications] = useState([]);
   const [pdfs, setPdfs] = useState([]);
+  const [planPdfs, setPlanPdfs] = useState([]);
   const [planImg, setPlanImg] = useState([]);
   const [projectTitle, setProjectTitle] = useState("");
   const [isProjectImg, setIsProjectImg] = useState(false);
@@ -48,7 +49,7 @@ const ProjectTabs = () => {
   const getProjects = async (projectid) => {
     // const {value} = e.target
     const response = await axiosClientServiceApi.get(
-       `api/v1/project/getSelectedClientProject/${projectid}/`,
+       `/project/getSelectedClientProject/${projectid}/`,
     );
     if (response?.status == 200) {
       const projectData = response.data;
@@ -72,7 +73,7 @@ const ProjectTabs = () => {
       const imgs = filterCategory(data, "images");
       const project = [
         {
-          ...proj.project,
+          ...proj.project[0],
           imgs: imgs,
         },
       ];
@@ -85,8 +86,12 @@ const ProjectTabs = () => {
     }
 
     if (type === "plan") {
-      const planImgs = filterCategory(data, "Plans");
-      setPlanImg(planImgs);
+      const filteredPlanPdfImgs = filterCategory(data, "Plans");
+      const images = filterImages(filteredPlanPdfImgs);
+      setPlanImg(images);
+      const pdfs = filterPdfs(filteredPlanPdfImgs);
+      setPlanPdfs(pdfs);
+     
     }
 
     if (type === "price") {
@@ -113,14 +118,14 @@ const ProjectTabs = () => {
   const filterImages = (data) => {
     return data.filter(
       (item) =>
-        item.contentType === "jpg" ||
-        item.contentType === "jpeg" ||
-        item.contentType === "png",
+        item.contentType === ".jpg" ||
+        item.contentType === ".jpeg" ||
+        item.contentType === ".png",
     );
   };
 
   const filterPdfs = (data) => {
-    return data.filter((item) => item.contentType === "pdf");
+    return data.filter((item) => item.contentType === ".pdf");
   };
 
   return (
@@ -363,14 +368,14 @@ const ProjectTabs = () => {
               ) : (
                 ""
               )}
-              {planImg?.length > 0 ? (
+              {planImg?.length > 0 || planPdfs.length > 0 ? (
                 <div
                   className="tab-pane fade"
                   id="nav-plan"
                   role="tabpanel"
                   aria-labelledby="nav-plan-tab"
                 >
-                  <Cost images={planImg} pdfs={[]} />
+                  <Cost images={planImg} pdfs={planPdfs} />
                 </div>
               ) : (
                 ""

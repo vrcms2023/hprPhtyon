@@ -94,6 +94,7 @@ function App() {
     <>
       <BrowserRouter>
       {isLoading ?  <LoadingSpinner /> : ''}
+      {/* <LoadingSpinner />  */}
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />

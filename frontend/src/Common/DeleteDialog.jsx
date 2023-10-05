@@ -2,12 +2,12 @@ import React from "react";
 import "./DeleteDialog.css";
 
 const DeleteDialog = (props) => {
-  const { onClose, callback, label, message } = props;
+  const { title, onClose, callback, label, message, buttonStyle } = props;
   return (
     <div className="popup-overlay d-flex justify-content-center align-items-center flex-column">
-      <h3>Are you sure?</h3>
+      <h3>{title ? title : 'Are you sure?'}</h3>
       <p className="text-muted m-0">
-        {message }
+        {message ?message :'' }
       </p>
       <div>
         <hr className="mb-4" />
@@ -15,13 +15,13 @@ const DeleteDialog = (props) => {
           No
         </button>
         <button
-          className="btn btn-danger"
+          className={`btn ${buttonStyle ? buttonStyle : 'btn-danger'}`}
           onClick={() => {
             callback();
             onClose();
           }}
         >
-          Yes,{label ? label : "Delete"} it!
+          Yes, {label ? label : " Delete"} it!
         </button>
       </div>
     </div>

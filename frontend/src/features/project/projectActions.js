@@ -6,7 +6,7 @@ export const getDashBoardProjects = createAsyncThunk(
   async (rejectWithValue) => {
     try {
       const { data } = await axiosServiceApi.get(
-        `api/v1/project/getDashboardProject/`,
+        `/project/getDashboardProject/`,
       );
 
       return data;

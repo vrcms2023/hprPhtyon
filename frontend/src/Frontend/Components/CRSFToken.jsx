@@ -21,7 +21,7 @@ const CSRFToken = () => {
 
   useEffect(() => {
     const getcsrfToken = async () => {
-      await axiosClientServiceApi.get(`/api/v1/user/csrf_cookie/`);
+      await axiosClientServiceApi.get(`/user/csrf_cookie/`);
       setcrsfTokenValue(getCookie("csrftoken"));
     };
     getcsrfToken();

@@ -38,7 +38,7 @@ const Contact = () => {
     setFormerror(errors);
     if (Object.keys(errors).length > 0) return;
     try{
-      const response = await axiosClientServiceApi.post(`api/v1/contactus/`,{
+      const response = await axiosClientServiceApi.post(`/contactus/`,{
         ...formData,
       },
     );

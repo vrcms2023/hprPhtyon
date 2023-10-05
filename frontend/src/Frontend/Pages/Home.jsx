@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     const getTestimonial = async () => {
       const response = await axiosClientServiceApi.get(
-        `api/v1/testimonials/clientTestimonials/`,
+        `/testimonials/clientTestimonials/`,
       );
       if (response?.status == 200) {
         setTestmonis(response.data.testimonial);

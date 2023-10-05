@@ -13,7 +13,7 @@ const ResendActivationEmail = () => {
     const body = JSON.stringify(email);
     try {
       const data = await axiosClientServiceApi.post(
-        `api/v1/user/auth/users/resend_activation/`,
+        `/user/auth/users/resend_activation/`,
         body,
       );
       if (data.status == 204) {

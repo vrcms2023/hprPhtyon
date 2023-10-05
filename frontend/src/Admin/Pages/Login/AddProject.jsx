@@ -65,7 +65,7 @@ const [tempFile, setTempFile] = useState();
   useEffect(() => {
     const getPorjectCategory = async () => {
       const response = await axiosServiceApi.get(
-        `api/v1/project/categorylist/`,
+        `/project/categorylist/`,
       );
       if (response?.status == 200) {
         setDefaultProjectType(response.data);
@@ -145,7 +145,7 @@ const [tempFile, setTempFile] = useState();
       return;
     }
     try {
-      const response = await axiosServiceApi.post(`api/v1/project/addProject/`, {
+      const response = await axiosServiceApi.post(`/project/addProject/`, {
         ...getProjectStatus(),
         projectTitle: projectName,
         created_by: userName,
@@ -180,7 +180,7 @@ const [tempFile, setTempFile] = useState();
    */
   useEffect(() => {
     const getSelectedProject = async () => {
-      const response = await axiosServiceApi.get(`api/v1/project/editProject/${id}/`);
+      const response = await axiosServiceApi.get(`/project/editProject/${id}/`);
 
       if (response.status !== 200) {
         setErrorMessage(response.data.message);
@@ -231,7 +231,7 @@ const [tempFile, setTempFile] = useState();
       updated_By: userName,
       percentValue: percentValue,
     }
-    const basicProjectDetails =  axiosServiceApi.put(`api/v1/project/editProject/${newProject.id}/`,basicDetail);
+    const basicProjectDetails =  axiosServiceApi.put(`/project/editProject/${newProject.id}/`,basicDetail);
 
     const amenitiesData = {
       projectID: newProject.id,
@@ -244,9 +244,9 @@ const [tempFile, setTempFile] = useState();
     let amenitiesDeatils = ""
 
     if(amenities.id === '') {
-      amenitiesDeatils =  axiosServiceApi.post(`/api/v1/project/amenities/`, amenitiesData);
+      amenitiesDeatils =  axiosServiceApi.post(`/project/amenities/`, amenitiesData);
     } else{
-      amenitiesDeatils =  axiosServiceApi.put(`/api/v1/project/getAmenitiesById/${newProject.id}/`, amenitiesData);
+      amenitiesDeatils =  axiosServiceApi.put(`/project/getAmenitiesById/${newProject.id}/`, amenitiesData);
     }
     
     let listOfexitSpecifications = []
@@ -278,11 +278,11 @@ const [tempFile, setTempFile] = useState();
     let newspecification = null
     let exitSpecification = null
     if(listOfnewSpecifications.length > 0) {
-      newspecification =  axiosServiceApi.post(`/api/v1/project/specification/`, listOfnewSpecifications);
+      newspecification =  axiosServiceApi.post(`/project/specification/`, listOfnewSpecifications);
       url.push(newspecification)
     } 
     if(listOfexitSpecifications.length > 0){
-      exitSpecification =  axiosServiceApi.put(`/api/v1/project/updatespecification/${newProject.id}/`, listOfexitSpecifications);
+      exitSpecification =  axiosServiceApi.put(`/project/updatespecification/${newProject.id}/`, listOfexitSpecifications);
       url.push(exitSpecification)
     }
 
@@ -327,7 +327,7 @@ const [tempFile, setTempFile] = useState();
         isActive : true
       }
       const response = await axiosServiceApi.patch(
-        `/api/v1/project/publishProject/${newProject.id}/`, data
+        `/project/publishProject/${newProject.id}/`, data
       );
       if (response.status === 200) {
         const publisher = JSON.parse(response.data.project.publish);
@@ -587,7 +587,7 @@ const [tempFile, setTempFile] = useState();
                       <input
                         type="text"
                         className="form-control"
-                        value={projectName}
+                        value={projectName ?projectName :""}
                         onChange={titleInputHandleChange}
                         id="projectName"
                         placeholder="Add Project Name"
@@ -646,7 +646,7 @@ const [tempFile, setTempFile] = useState();
                         type="text"
                         className="form-control"
                         name="aboutstitle"
-                        value={aboutUs.aboutstitle}
+                        value={aboutUs.aboutstitle ? aboutUs.aboutstitle : ""}
                         onChange={changeHandler}
                         id="aboutstitle"
                       />
@@ -662,7 +662,7 @@ const [tempFile, setTempFile] = useState();
                         type="text"
                         className="form-control"
                         name="aboutussubtitle"
-                        value={aboutUs.aboutussubtitle}
+                        value={aboutUs.aboutussubtitle ? aboutUs.aboutussubtitle : ''}
                         onChange={changeHandler}
                         id="aboutussubtitle"
                       />
@@ -727,7 +727,7 @@ const [tempFile, setTempFile] = useState();
                       category="Plans"
                       gallerysetState={setPlanObject}
                       galleryState={planObject}
-                      validTypes="image/png,image/jpeg"
+                      validTypes="image/png,image/jpeg,application/pdf"
                       descriptionTitle="Plan Description"
                       showDescription={false}
                       buttonLable="Upload Plan"

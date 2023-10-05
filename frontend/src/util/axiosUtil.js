@@ -4,7 +4,7 @@ import { getBaseURL } from "./ulrUtil";
 import { getCookie } from "./cookieUtil";
 import { startLoading, stoptLoading } from "../features/project/loadingSlice";
 
-axios.defaults.baseURL = getBaseURL();
+axios.defaults.baseURL = getBaseURL()+"/api/v1";
 /**
  * Axios API call with Access token
  */

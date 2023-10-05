@@ -21,7 +21,7 @@ registerPlugin(
 const FileUpload = ({
   title,
   project,
-  updatedBy,
+  updated_By,
   category,
   gallerysetState,
   galleryState,
@@ -79,7 +79,7 @@ const FileUpload = ({
       formData.append('created_by', getCookie("userName"));
       formData.append('updated_By', getCookie("userName"));
 
-      arrURL.push(axiosFileUploadServiceApi.post(`api/v1/gallery/createGallery/`,formData));
+      arrURL.push(axiosFileUploadServiceApi.post(`/gallery/createGallery/`,formData));
 
     });
     try {
@@ -160,7 +160,7 @@ const FileUpload = ({
           {
             {
               process:{
-                url: `${backendURL}/api/v1/gallery/createGallerys/`,
+                url: `${backendURL}/gallery/createGallerys/`,
                 ondata: (formData) => {
                   formData.append('projectID', project?.id);
                   formData.append('category', category);
@@ -205,7 +205,6 @@ const FileUpload = ({
                 cssClass="btn btn-success mx-2"
                 label={buttonLable ? buttonLable : "upload Image"}
                 handlerChange={uploadFile}
-                loadingState={false}
               />
             </div>
       </div>

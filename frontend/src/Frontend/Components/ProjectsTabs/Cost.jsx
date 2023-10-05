@@ -1,18 +1,35 @@
 import React from "react";
-import { getCookie } from "../../../util/cookieUtil";
+import { getCookie,setCookie, removeCookie } from "../../../util/cookieUtil";
 import { useNavigate } from "react-router-dom";
+import DeleteDialog from "../../../Common/DeleteDialog";
+import { confirmAlert } from "react-confirm-alert";
+import { getBaseURL } from "../../../util/ulrUtil";
 
 const Cost = ({ images, pdfs }) => {
   const navigate = useNavigate();
+  const baseURL= getBaseURL()
+
 
   const downloadPDF = (path, name) => {
+
+    const navigateTocontactus =() => {
+      removeCookie("previousPath");
+      setCookie("previousPath", window.location.pathname);
+      navigate(`/contact`);
+    }
+
     if (getCookie("clientInformation") !== undefined) {
       const link = document.createElement("a");
       link.download = name;
-      link.href = path;
+      link.href = baseURL+path;
       link.click();
     } else {
-      navigate(`/contact`);
+      
+      confirmAlert({
+        customUI: ({ onClose }) => {
+          return <DeleteDialog title={"We need some your personal details to download PDF's"} onClose={onClose} callback={navigateTocontactus} label={"to Download PDF's"} buttonStyle={'btn-success'} />;
+        },
+      });
     }
   };
 
@@ -21,7 +38,7 @@ const Cost = ({ images, pdfs }) => {
   if (images.length > 0) {
     imgs = images.map((item, i) => (
       <div className="my-5 text-center zoomImg" key={i}>
-        <img src={item.path} alt="" className="w-50" />
+        <img src={`${baseURL}${item.path}`} alt="" className="w-50" />
       </div>
     ));
   }

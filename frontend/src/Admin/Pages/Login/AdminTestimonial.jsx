@@ -60,7 +60,7 @@ export const AdminTestimonial = () => {
 
   const getTestimonialList = async () => {
     const response = await axiosServiceApi.get(
-      `api/v1/testimonials/createTestimonials/`,
+      `/testimonials/createTestimonials/`,
     );
     if (response?.status == 200 && response.data?.testimonial?.length > 0) {
       const listReverseOrder = response.data.testimonial;
@@ -113,11 +113,11 @@ export const AdminTestimonial = () => {
       let response = "";
         if(editState){
           testimonial.updated_By = userName
-          response = await axiosServiceApi.put(`api/v1/testimonials/updateTestimonials/${id}/`, {
+          response = await axiosServiceApi.put(`/testimonials/updateTestimonials/${id}/`, {
             ...testimonial,
           });
         } else {
-          response = await axiosServiceApi.post(`api/v1/testimonials/createTestimonials/`, {
+          response = await axiosServiceApi.post(`/testimonials/createTestimonials/`, {
             ...testimonial,
           });
         }
@@ -151,7 +151,7 @@ export const AdminTestimonial = () => {
       title,
       id,
     } = testimonial;
-
+    setTestimonialObject([]);
     const testimonialObj = {
       title: title,
       description: description,
@@ -172,7 +172,7 @@ export const AdminTestimonial = () => {
     const deleteSelectedNews = async () => {
       try{
         const response = await axiosServiceApi.delete(
-          `/api/v1/testimonials/updateTestimonials/${testimonial.id}/`,
+          `/testimonials/updateTestimonials/${testimonial.id}/`,
         );
         if (response.status !== 204) {
           setErrorMessage(response.data.message);
@@ -331,7 +331,7 @@ export const AdminTestimonial = () => {
                           <img
                             width={"60"}
                             height={"60"}
-                            src="images/dummy-image-square.png"
+                            src={`${baseurl}/media/images/dummy-image-square.png`}
                             alt=""
                           />
                         )}{" "}

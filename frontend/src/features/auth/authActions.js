@@ -8,7 +8,7 @@ export const userLogin = createAsyncThunk(
     try {
       // configure header's Content-Type as JSON
 
-      const { data } = await axiosClientServiceApi.post(`api/v1/user/auth/jwt/create/`, {
+      const { data } = await axiosClientServiceApi.post(`/user/auth/jwt/create/`, {
         email,
         password,
       });
@@ -38,7 +38,7 @@ export const registerUser = createAsyncThunk(
   "auth/register",
   async ({ userName, email, password, re_password }, { rejectWithValue }) => {
     try {
-      await axiosClientServiceApi.post(`api/v1/user/auth/users/`, {
+      await axiosClientServiceApi.post(`/user/auth/users/`, {
         userName,
         email,
         password,
@@ -64,7 +64,7 @@ export const getUser = createAsyncThunk(
   "auth/getUser",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axiosServiceApi.get(`api/v1/user/auth/users/me/`);
+      const { data } = await axiosServiceApi.get(`/user/auth/users/me/`);
       localStorage.setItem("userName", data.userName);
 
       return data;
