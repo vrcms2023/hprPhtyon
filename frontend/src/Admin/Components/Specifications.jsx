@@ -31,7 +31,7 @@ const Specifications = ({
       
       if(objId !== undefined){
         try{
-          const response = await axiosServiceApi.delete(`api/v1/project/deleteSpecifications/${objId}/` );
+          const response = await axiosServiceApi.delete(`/project/deleteSpecifications/${objId}/` );
           if(response.status === 204){
             toast.success(`${deleteVal[i].title} is deleted`);
             deleteVal.splice(i, 1);
@@ -66,7 +66,7 @@ const Specifications = ({
   useEffect(() => {
     const getSelectedSpecification = async () => {
       const response = await axiosServiceApi.get(
-        `api/v1/project/getSpecification/${project.id}/`,
+        `/project/getSpecification/${project.id}/`,
       );
       if (
         response?.status == 200 &&

@@ -10,7 +10,7 @@ from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 # Create your views here.
 
 class ImageGalleryView(viewsets.ModelViewSet):
-    #permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.AllowAny,)
     parser_classes=[MultiPartParser, FormParser, FileUploadParser]
 
     def get_original_name(self,request):

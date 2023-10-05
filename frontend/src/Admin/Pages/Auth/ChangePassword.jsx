@@ -27,7 +27,7 @@ const ChangePassword = () => {
     const body = JSON.stringify(data);
     try {
       const data = await axiosServiceApi.post(
-        `api/v1/user/auth/users/set_password/`,
+        `/user/auth/users/set_password/`,
         body,
       );
       if (data.status == 204) {

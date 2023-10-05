@@ -53,7 +53,7 @@ export const AdminNews = () => {
   const [newsList, setNewsList] = useState([]);
 
   const getNewList = async () => {
-    const response = await axiosServiceApi.get(`api/v1/appNews/createAppNews/`);
+    const response = await axiosServiceApi.get(`/appNews/createAppNews/`);
     if (response?.status == 200 && response.data?.appNews?.length > 0) {
       const listReverseOrder = response.data.appNews;
       const sortData = sortByDate(listReverseOrder)
@@ -100,11 +100,11 @@ export const AdminNews = () => {
       let response = "";
       if(editState){
         news.updated_By = userName
-        response = await axiosServiceApi.put(`api/v1/appNews/updateAppNews/${id}/`, {
+        response = await axiosServiceApi.put(`/appNews/updateAppNews/${id}/`, {
           ...news,
         });
       } else {
-        response = await axiosServiceApi.post(`api/v1/appNews/createAppNews/`, {
+        response = await axiosServiceApi.post(`/appNews/createAppNews/`, {
           ...news,
         });
       }
@@ -139,7 +139,7 @@ export const AdminNews = () => {
       newstitle,
       id,
     } = news;
-
+    setNewsObject([]);
     const newsObj = {
       newstitle: newstitle,
       description: description,
@@ -160,7 +160,7 @@ export const AdminNews = () => {
     const deleteSelectedNews = async () => {
       try{
         const response = await axiosServiceApi.delete(
-          `api/v1/appNews/updateAppNews/${news.id}/`,
+          `/appNews/updateAppNews/${news.id}/`,
         );
   
         if (response.status !== 204) {
@@ -308,7 +308,7 @@ export const AdminNews = () => {
                             height={"60"}
                             src={`${baseurl}${news.imageUrls[0]}`}
                             alt=" "
-                          /> {news?.imageUrls.length > 1 ? `+${news?.imageUrls.length - 1}` : ''}
+                          /> <span class="badge text-bg-secondary">{news?.imageUrls.length > 1 ? `${news?.imageUrls.length} img's` : ''}</span>
                           </>
                         ) : (
                           <img

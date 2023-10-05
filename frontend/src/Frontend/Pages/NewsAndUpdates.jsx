@@ -19,7 +19,7 @@ const NewsAndUpdates = () => {
   useEffect(() => {
     const getNews = async () => {
       const response = await axiosClientServiceApi.get(
-        `api/v1/appNews/clientAppNews/`,
+        `/appNews/clientAppNews/`,
       );
       if (response?.status == 200) {
         setNews(response.data.appNews);

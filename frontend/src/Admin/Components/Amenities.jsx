@@ -10,7 +10,7 @@ export const AmenitiesList = ({ project, amenities, setAmenities }) => {
     const getSelectedAmenities = async () => {
       try{
         const response = await axiosServiceApi.get(
-          `/api/v1/project/getAmenitiesById/${project?.id}/`,
+          `/project/getAmenitiesById/${project?.id}/`,
         );
         if (response?.status == 200) {
           setAmenities(response.data.amenitie);

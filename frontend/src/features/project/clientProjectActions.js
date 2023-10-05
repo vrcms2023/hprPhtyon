@@ -6,7 +6,7 @@ export const getClientProjects = createAsyncThunk(
   async (rejectWithValue) => {
     try {
       const { data } = await axiosClientServiceApi.get(
-        `api/v1/project/clientProject/`,
+        `/project/clientProject/`,
       );
 
       return data;

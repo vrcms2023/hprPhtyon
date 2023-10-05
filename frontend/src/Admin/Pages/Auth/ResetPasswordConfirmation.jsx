@@ -26,7 +26,7 @@ const ResetPasswordConfirmation = () => {
     const body = JSON.stringify(data);
     try {
       const data = await axiosClientServiceApi.post(
-        `api/v1/user/auth/users/reset_password_confirm/`,
+        `/user/auth/users/reset_password_confirm/`,
         body,
       );
       if (data.status == 204) {

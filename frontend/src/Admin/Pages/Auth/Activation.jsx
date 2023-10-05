@@ -28,7 +28,7 @@ const Activation = () => {
 
     try {
       const response = await axiosClientServiceApi.post(
-        `api/v1/user/auth/users/activation/`,
+        `/user/auth/users/activation/`,
         body,
       );
       setIsLoading(false);

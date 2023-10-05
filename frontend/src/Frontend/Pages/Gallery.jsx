@@ -31,7 +31,7 @@ const Gallery = ({ projectImages, type }) => {
     <>
       {projectImages?.length > 0
         ? projectImages.map((project) => (
-            <div
+            <div 
               className={`gallery projectTabs ${
                 type === "applicationgallery"
                   ? "p-5 py-3 border-bottom"
@@ -39,6 +39,7 @@ const Gallery = ({ projectImages, type }) => {
               }`}
               key={project.id}
             >
+           
               {type !== "" && type === "applicationgallery" ? (
                 <h3 className="text-start">{project.projectTitle}</h3>
               ) : (
@@ -55,7 +56,7 @@ const Gallery = ({ projectImages, type }) => {
               />
             </div>
           ))
-        : null}
+        : <div className="fs-2 p-5 text-warning text-center">No images found</div>}
 
       {showModal && (
         <DynamicCarousel

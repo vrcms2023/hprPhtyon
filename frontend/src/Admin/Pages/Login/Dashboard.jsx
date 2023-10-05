@@ -93,7 +93,7 @@ const Dashboard = () => {
   const callService = async(id, data, project, message) =>{
     try{
       const response = await axiosServiceApi.patch(
-        `/api/v1/project/archiveProject/${id}/`,data
+        `/project/archiveProject/${id}/`,data
       );
       if (response.data?.projectList?.length > 0) {
         toast.success(`${project.projectTitle} ${message}`);

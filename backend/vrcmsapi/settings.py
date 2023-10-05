@@ -221,11 +221,11 @@ DJOSER = {
 
 CORS_ORIGIN_ALLOW_ALL  = True
 
-#CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://192.168.29.99:3000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://192.168.29.99:3000']
 
-#CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://192.168.29.99:3000"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://192.168.29.99:3000"]
 
 
-CSRF_TRUSTED_ORIGINS = ['https://cms.hprinfra.com']
+#CSRF_TRUSTED_ORIGINS = ['https://cms.hprinfra.com']
 
-CORS_ALLOWED_ORIGINS = ['https://cms.hprinfra.com']
+#CORS_ALLOWED_ORIGINS = ['https://cms.hprinfra.com']

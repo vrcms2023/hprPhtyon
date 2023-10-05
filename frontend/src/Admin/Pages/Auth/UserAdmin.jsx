@@ -29,7 +29,7 @@ const UserAdmin = () => {
    */
   const getAllUserDetails = async () => {
     try {
-      const response = await axiosServiceApi.get(`api/v1/user/auth/users/`);
+      const response = await axiosServiceApi.get(`/user/auth/users/`);
       if (response?.status == 200 && response.data?.length > 0) {
         setUserDetails(response.data);
       } else {
@@ -47,7 +47,7 @@ const UserAdmin = () => {
     console.log(user);
     const deleteUser = async () => {
       // const response = await axiosServiceApi.delete(
-      //   `api/v1/user/auth/users/me/`,
+      //   `/user/auth/users/me/`,
       // );
       //console.log(response)
     };
@@ -72,7 +72,7 @@ const UserAdmin = () => {
   const activeDeactiveUser = async (user) => {
     try {
       const response = await axiosServiceApi.put(
-        `api/v1/user/auth/appAccess/${user.id}/`,
+        `/user/auth/appAccess/${user.id}/`,
         {
           is_appAccess: !user.is_appAccess,
         },

@@ -7,6 +7,9 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { axiosServiceApi } from "../util/axiosUtil";
 import { getBaseURL } from "../util/ulrUtil";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie } from "../util/cookieUtil";
+
 
 const CatageoryImgC = ({
   title,
@@ -22,6 +25,7 @@ const CatageoryImgC = ({
   ]);
   const navigate = useNavigate();
   const baseURL = getBaseURL()
+  const { userInfo } = useSelector((state) => state.auth);
 
   /**
    * get selected Images for edit
@@ -29,7 +33,7 @@ const CatageoryImgC = ({
   useEffect(() => {
 
     const getSelectedImages = async () => {
-      const response = await axiosServiceApi.get(`api/v1/gallery/getSelectedImagesById/`,{
+      const response = await axiosServiceApi.get(`/gallery/getSelectedImagesById/`,{
         params: {
           projectID: project.id,
           category:category
@@ -47,7 +51,7 @@ const CatageoryImgC = ({
   const thumbDelete = (id, name) => {
     const deleteImageByID = async () => {
       const response = await axiosServiceApi.delete(
-        `api/v1/gallery/deleteGalleryImage/${id}/`,
+        `/gallery/deleteGalleryImage/${id}/`,
       );
       if (response.status == 204) {
         const list = catategoryImgs.filter((item) => item.id !== id);
@@ -62,6 +66,17 @@ const CatageoryImgC = ({
   };
 
   const downloadPDF = (url) => {
+
+    if (userInfo || getCookie("access")) {
+      return true
+    }
+   
+    const navigateTocontactus =() => {
+      removeCookie("previousPath");
+      setCookie("previousPath", window.location.pathname);
+      navigate(`/contact`);
+    }
+
     if (cookies.clientInformation !== undefined) {
       window.open(
         url,
@@ -69,9 +84,11 @@ const CatageoryImgC = ({
         "location=yes,height=800,width=600 ,scrollbars=yes,status=yes",
       );
     } else {
-      removeCookie("previousPath");
-      setCookie("previousPath", window.location.pathname);
-      navigate(`/contact`);
+      confirmAlert({
+        customUI: ({ onClose }) => {
+          return <DeleteDialog title={"We need some your personal details to download PDF's"} onClose={onClose} callback={navigateTocontactus} label={"to Download PDF's"} buttonStyle={'btn-success'} />;
+        },
+      });
     }
   };
 
