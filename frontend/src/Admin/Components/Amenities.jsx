@@ -8,17 +8,16 @@ export const AmenitiesList = ({ project, amenities, setAmenities }) => {
    */
   useEffect(() => {
     const getSelectedAmenities = async () => {
-      try{
+      try {
         const response = await axiosServiceApi.get(
           `/project/getAmenitiesById/${project?.id}/`,
         );
         if (response?.status == 200) {
           setAmenities(response.data.amenitie);
         }
-      }catch(error){
-        console.log(error)
+      } catch (error) {
+        console.log(error);
       }
-      
     };
     if (project?.id) {
       getSelectedAmenities();
@@ -49,7 +48,7 @@ export const Amenities = ({ title, value, amenities, setAmenities, name }) => {
   const handleChange = (e, i) => {
     const { name, value } = e.target;
     const onchangeVal = { ...amenities };
-    onchangeVal[name] = value !== "" ? value :null;
+    onchangeVal[name] = value !== "" ? value : null;
     setAmenities(onchangeVal);
   };
   return (
@@ -60,7 +59,7 @@ export const Amenities = ({ title, value, amenities, setAmenities, name }) => {
         <textarea
           className="form-control"
           name={name}
-          value={value ? value : ''}
+          value={value ? value : ""}
           onChange={(e) => handleChange(e)}
           id="amenitiesDescription"
           rows="3"

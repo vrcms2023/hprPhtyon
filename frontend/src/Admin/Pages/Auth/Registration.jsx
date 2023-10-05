@@ -25,8 +25,6 @@ const Registration = () => {
     formState: { errors },
   } = useForm();
 
-
-
   useEffect(() => {
     // redirect user to login page if registration was successful
     if (success) {
@@ -65,7 +63,6 @@ const Registration = () => {
 
   return (
     <div className="login">
-      
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <form onSubmit={handleSubmit(submitForm)} className="shadow-lg">
           <CSRFToken />

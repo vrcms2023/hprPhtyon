@@ -25,7 +25,7 @@ const News = ({ item, dateFormat, articleHandler }) => {
         <img
           className="w-100 noImg"
           height={"100"}
-          src={`${baseURL}/media/images/dummy-image-square.png`} 
+          src={`${baseURL}/media/images/dummy-image-square.png`}
           alt=""
         />
       )}

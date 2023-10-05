@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import Footer from "./Common/Footer/Footer";
 import Header from "./Common/Header/Header";
@@ -43,10 +43,9 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import ContactUSAdmin from "./Admin/Pages/Auth/ContactUSAdmin";
 import LoadingSpinner from "./Common/LoadingSpinner";
 
-
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
-  const { isLoading } = useSelector((state) => state.loader)
+  const { isLoading } = useSelector((state) => state.loader);
   const [loginState, setLoginState] = useState("");
   const pathList = [
     "/login",
@@ -63,11 +62,10 @@ function App() {
     "/editproject",
     "/addproject",
     "/testimonial",
-    "/contactUSList"
+    "/contactUSList",
   ];
   let isHideMenu =
     pathList.indexOf(window.location.pathname) >= 0 ? true : false;
-    
 
   useEffect(() => {
     if (userInfo || getCookie("access")) {
@@ -93,8 +91,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      {isLoading ?  <LoadingSpinner /> : ''}
-      {/* <LoadingSpinner />  */}
+        {isLoading ? <LoadingSpinner /> : ""}
+        {/* <LoadingSpinner />  */}
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -120,7 +118,6 @@ function App() {
             path="/password/reset/:uid/:token"
             element={<ResetPasswordConfirmation />}
           />
-
           <Route path="*" element={<PageNotFound />} />
           <Route
             exact
@@ -132,7 +129,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             exact
             path="/change_password"
             element={
@@ -198,7 +195,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             exact
             path="/contactUSList"
             element={
@@ -210,7 +207,7 @@ function App() {
           />
           ContactUSAdmin
         </Routes>
-        { isHideMenu ? null : <Footer />}
+        {isHideMenu ? null : <Footer />}
       </BrowserRouter>
       <ToastContainer autoClose={2000} theme="colored" />
     </>

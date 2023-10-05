@@ -49,7 +49,7 @@ const ProjectTabs = () => {
   const getProjects = async (projectid) => {
     // const {value} = e.target
     const response = await axiosClientServiceApi.get(
-       `/project/getSelectedClientProject/${projectid}/`,
+      `/project/getSelectedClientProject/${projectid}/`,
     );
     if (response?.status == 200) {
       const projectData = response.data;
@@ -91,7 +91,6 @@ const ProjectTabs = () => {
       setPlanImg(images);
       const pdfs = filterPdfs(filteredPlanPdfImgs);
       setPlanPdfs(pdfs);
-     
     }
 
     if (type === "price") {

@@ -10,7 +10,7 @@ const GalleryImgThumb = ({
   projectID,
 }) => {
   const imagesByDate = getImagesByDate(imgs);
-  const baseURL = getBaseURL()
+  const baseURL = getBaseURL();
 
   return (
     <>

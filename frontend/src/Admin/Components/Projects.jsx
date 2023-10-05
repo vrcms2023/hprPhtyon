@@ -83,9 +83,7 @@ const ProjectItem = ({ title, cssClass, projects, handleProjectDelete }) => {
                       </Link>
                       <Link
                         to=""
-                        onClick={() =>
-                          handleProjectDelete(project, project.id)
-                        }
+                        onClick={() => handleProjectDelete(project, project.id)}
                       >
                         <i
                           className="fa fa-trash-o fs-4 text-danger"
@@ -139,15 +137,13 @@ export const Projects = ({ project, handleProjectDelete }) => {
       ) : (
         <div className="col-md-6 col-lg-4">
           <Title
-          title={'Ongoing Projects'}
-          cssClass="text-start fw-normal pt-3 mb-3 fs-6 text-dark"
-        />
-        <div className="fw-bold d-flex justify-content-center align-items-center">
-          No project are available
+            title={"Ongoing Projects"}
+            cssClass="text-start fw-normal pt-3 mb-3 fs-6 text-dark"
+          />
+          <div className="fw-bold d-flex justify-content-center align-items-center">
+            No project are available
+          </div>
         </div>
-      </div>
-
-        
       )}
       {project?.future?.length > 0 ? (
         <div className="col-md-6 col-lg-4">
@@ -161,13 +157,13 @@ export const Projects = ({ project, handleProjectDelete }) => {
       ) : (
         <div className="col-md-6 col-lg-4">
           <Title
-          title={'Upcoming Projects'}
-          cssClass="text-start fw-normal pt-3 mb-3 fs-6 text-dark"
-        />
-        <div className="fw-bold d-flex justify-content-center align-items-center">
-          No project are available
+            title={"Upcoming Projects"}
+            cssClass="text-start fw-normal pt-3 mb-3 fs-6 text-dark"
+          />
+          <div className="fw-bold d-flex justify-content-center align-items-center">
+            No project are available
+          </div>
         </div>
-      </div>
       )}
       {project?.completed?.length > 0 ? (
         <div className="col-md-6 col-lg-4">
@@ -181,13 +177,13 @@ export const Projects = ({ project, handleProjectDelete }) => {
       ) : (
         <div className="col-md-6 col-lg-4">
           <Title
-          title={'Completed Projects'}
-          cssClass="text-start fw-normal pt-3 mb-3 fs-6 text-dark"
-        />
-        <div className="fw-bold d-flex justify-content-center align-items-center">
-          No project are available
+            title={"Completed Projects"}
+            cssClass="text-start fw-normal pt-3 mb-3 fs-6 text-dark"
+          />
+          <div className="fw-bold d-flex justify-content-center align-items-center">
+            No project are available
+          </div>
         </div>
-      </div>
       )}
     </>
   );

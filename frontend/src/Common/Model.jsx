@@ -2,7 +2,7 @@ import React from "react";
 import { getBaseURL } from "../util/ulrUtil";
 
 const Model = ({ obj, closeModel, privacy, flag }) => {
-  const { newstitle, imageUrls, description, } = obj;
+  const { newstitle, imageUrls, description } = obj;
   const baseURL = getBaseURL();
   // const { dec, title, cr, crm } = privacy;
 

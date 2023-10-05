@@ -18,12 +18,11 @@ const ChangePassword = () => {
   const navigate = useNavigate();
 
   const resetPassword = async (formData) => {
-    
     const data = {
-        current_password: formData.current_password,
-        new_password: formData.new_password,
-        re_new_password: formData.re_new_password,
-      };
+      current_password: formData.current_password,
+      new_password: formData.new_password,
+      re_new_password: formData.re_new_password,
+    };
     const body = JSON.stringify(data);
     try {
       const data = await axiosServiceApi.post(
@@ -33,10 +32,9 @@ const ChangePassword = () => {
       if (data.status == 204) {
         setSuccess(true);
         toast.success(`Password updated successfully `);
-        setTimeout(()=>{
+        setTimeout(() => {
           dispatch(logout());
-        },5000)
-       
+        }, 5000);
       }
     } catch (error) {
       if (error.email) {
@@ -75,14 +73,19 @@ const ChangePassword = () => {
               />
               {success ? (
                 <>
-                  <div>Your password Updated successfully, login with new password</div>
+                  <div>
+                    Your password Updated successfully, login with new password
+                  </div>
                   <div className="mt-3">
-                  Click here to login ? <Link onClick={dispatch(logout())}  to="/login">Login</Link>
-                </div>
-              </>
+                    Click here to login ?{" "}
+                    <Link onClick={dispatch(logout())} to="/login">
+                      Login
+                    </Link>
+                  </div>
+                </>
               ) : (
                 <>
-                <div className="mb-3">
+                  <div className="mb-3">
                     <label
                       htmlFor="currentPassord"
                       className="form-label text-dark fw-normal"
@@ -100,14 +103,13 @@ const ChangePassword = () => {
                       className="form-control"
                       id="signPassord"
                     />
-                    
                   </div>
-                 <div className="mb-3">
+                  <div className="mb-3">
                     <label
                       htmlFor="signPassord"
                       className="form-label text-dark fw-normal"
                     >
-                     New Password
+                      New Password
                     </label>
                     <input
                       type="password"
@@ -151,24 +153,21 @@ const ChangePassword = () => {
                       handlerChange={loginHandler}
                       label="Reset Password"
                     />
-                    </div>
-                    <div className="d-grid gap-2 mt-4">
+                  </div>
+                  <div className="d-grid gap-2 mt-4">
                     <Button
-            type="submit"
-            cssClass="btn btn-secondary"
-            label="Back to Menu"
-            handlerChange={() => navigate("/main")}
-          />
+                      type="submit"
+                      cssClass="btn btn-secondary"
+                      label="Back to Menu"
+                      handlerChange={() => navigate("/main")}
+                    />
                   </div>
                 </>
               )}
             </form>
-          
-         </div>
+          </div>
         </div>
-       
       </div>
-    
     </div>
   );
 };

@@ -29,34 +29,35 @@ const Gallery = ({ projectImages, type }) => {
   // console.log("projectImages", projectImages)
   return (
     <>
-      {projectImages?.length > 0
-        ? projectImages.map((project) => (
-            <div 
-              className={`gallery projectTabs ${
-                type === "applicationgallery"
-                  ? "p-5 py-3 border-bottom"
-                  : "p-0 pt-4"
-              }`}
-              key={project.id}
-            >
-           
-              {type !== "" && type === "applicationgallery" ? (
-                <h3 className="text-start">{project.projectTitle}</h3>
-              ) : (
-                ""
-              )}
-              <p className="fs-6 text-dark text-start">
-                {project.imageDescription}
-              </p>
-              <GalleryImgThumb
-                imgs={project.imgs}
-                imageDescription={project.imageDescription}
-                findThumbHandler={findThumbHandler}
-                projectID={project.id}
-              />
-            </div>
-          ))
-        : <div className="fs-2 p-5 text-warning text-center">No images found</div>}
+      {projectImages?.length > 0 ? (
+        projectImages.map((project) => (
+          <div
+            className={`gallery projectTabs ${
+              type === "applicationgallery"
+                ? "p-5 py-3 border-bottom"
+                : "p-0 pt-4"
+            }`}
+            key={project.id}
+          >
+            {type !== "" && type === "applicationgallery" ? (
+              <h3 className="text-start">{project.projectTitle}</h3>
+            ) : (
+              ""
+            )}
+            <p className="fs-6 text-dark text-start">
+              {project.imageDescription}
+            </p>
+            <GalleryImgThumb
+              imgs={project.imgs}
+              imageDescription={project.imageDescription}
+              findThumbHandler={findThumbHandler}
+              projectID={project.id}
+            />
+          </div>
+        ))
+      ) : (
+        <div className="fs-2 p-5 text-warning text-center">No images found</div>
+      )}
 
       {showModal && (
         <DynamicCarousel

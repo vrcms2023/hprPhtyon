@@ -1,5 +1,5 @@
 import React from "react";
-import { getCookie,setCookie, removeCookie } from "../../../util/cookieUtil";
+import { getCookie, setCookie, removeCookie } from "../../../util/cookieUtil";
 import { useNavigate } from "react-router-dom";
 import DeleteDialog from "../../../Common/DeleteDialog";
 import { confirmAlert } from "react-confirm-alert";
@@ -7,27 +7,32 @@ import { getBaseURL } from "../../../util/ulrUtil";
 
 const Cost = ({ images, pdfs }) => {
   const navigate = useNavigate();
-  const baseURL= getBaseURL()
-
+  const baseURL = getBaseURL();
 
   const downloadPDF = (path, name) => {
-
-    const navigateTocontactus =() => {
+    const navigateTocontactus = () => {
       removeCookie("previousPath");
       setCookie("previousPath", window.location.pathname);
       navigate(`/contact`);
-    }
+    };
 
     if (getCookie("clientInformation") !== undefined) {
       const link = document.createElement("a");
       link.download = name;
-      link.href = baseURL+path;
+      link.href = baseURL + path;
       link.click();
     } else {
-      
       confirmAlert({
         customUI: ({ onClose }) => {
-          return <DeleteDialog title={"We need some your personal details to download PDF's"} onClose={onClose} callback={navigateTocontactus} label={"to Download PDF's"} buttonStyle={'btn-success'} />;
+          return (
+            <DeleteDialog
+              title={"We need some your personal details to download PDF's"}
+              onClose={onClose}
+              callback={navigateTocontactus}
+              label={"to Download PDF's"}
+              buttonStyle={"btn-success"}
+            />
+          );
         },
       });
     }

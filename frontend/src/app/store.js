@@ -17,5 +17,4 @@ const store = configureStore({
     getDefaultMiddleware().concat(authApi.middleware),
 });
 
-
 export default store;

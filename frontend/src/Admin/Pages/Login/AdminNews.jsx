@@ -15,7 +15,6 @@ import Error from "../../Components/Error";
 import { sortByDate } from "../../../util/dataFormatUtil";
 import { getBaseURL } from "../../../util/ulrUtil";
 
-
 export const AdminNews = () => {
   const navigate = useNavigate();
   const [newsObject, setNewsObject] = useState([]);
@@ -26,7 +25,7 @@ export const AdminNews = () => {
   const [editState, setEditState] = useState(false);
   const [id, setID] = useState("");
   const [userName, setUserName] = useState("");
-  const baseurl = getBaseURL()
+  const baseurl = getBaseURL();
 
   useEffect(() => {
     setUserName(getCookie("userName"));
@@ -34,7 +33,7 @@ export const AdminNews = () => {
 
   const generateUUID = () => {
     return uuidv4();
-  }
+  };
 
   const changeHandler = (e) => {
     setErrorMessage("");
@@ -45,9 +44,9 @@ export const AdminNews = () => {
     setnewsState(newsKeys);
     setNewProject({
       id: generateUUID(),
-    })
+    });
     setEditState(false);
-    setNewsObject([])
+    setNewsObject([]);
   };
 
   const [newsList, setNewsList] = useState([]);
@@ -56,7 +55,7 @@ export const AdminNews = () => {
     const response = await axiosServiceApi.get(`/appNews/createAppNews/`);
     if (response?.status == 200 && response.data?.appNews?.length > 0) {
       const listReverseOrder = response.data.appNews;
-      const sortData = sortByDate(listReverseOrder)
+      const sortData = sortByDate(listReverseOrder);
       setNewsList(sortData);
     } else {
       setNewsList([]);
@@ -98,8 +97,8 @@ export const AdminNews = () => {
 
     try {
       let response = "";
-      if(editState){
-        news.updated_By = userName
+      if (editState) {
+        news.updated_By = userName;
         response = await axiosServiceApi.put(`/appNews/updateAppNews/${id}/`, {
           ...news,
         });
@@ -109,7 +108,7 @@ export const AdminNews = () => {
         });
       }
 
-      if (response?.status == 200 || response?.status == 201 ) {
+      if (response?.status == 200 || response?.status == 201) {
         toast.success(
           `${newsState.newstitle} news ${editState ? "Update" : "created"}`,
         );
@@ -117,7 +116,7 @@ export const AdminNews = () => {
         setnewsState(newsKeys);
         setNewProject({
           id: generateUUID(),
-        })
+        });
         setNewsObject([]);
         getNewList();
       } else {
@@ -145,9 +144,9 @@ export const AdminNews = () => {
       description: description,
     };
     const newsObject = {
-      id : projectID,
-      category : 'news'
-    }
+      id: projectID,
+      category: "news",
+    };
     setNewProject(newsObject);
     setnewsState(newsObj);
     setEditState(true);
@@ -158,11 +157,11 @@ export const AdminNews = () => {
   const handleNewsDelete = (event, news) => {
     event.preventDefault();
     const deleteSelectedNews = async () => {
-      try{
+      try {
         const response = await axiosServiceApi.delete(
           `/appNews/updateAppNews/${news.id}/`,
         );
-  
+
         if (response.status !== 204) {
           setErrorMessage(response.data.message);
           toast.error("Unable to Delete news");
@@ -174,10 +173,9 @@ export const AdminNews = () => {
           setNewsObject([]);
           getNewList();
         }
-      } catch(error) {
+      } catch (error) {
         toast.error("Unable to Delete news");
       }
-      
     };
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -303,12 +301,17 @@ export const AdminNews = () => {
                         {" "}
                         {news?.imageUrls.length > 0 ? (
                           <>
-                          <img
-                            width={"60"}
-                            height={"60"}
-                            src={`${baseurl}${news.imageUrls[0]}`}
-                            alt=" "
-                          /> <span class="badge text-bg-secondary">{news?.imageUrls.length > 1 ? `${news?.imageUrls.length} img's` : ''}</span>
+                            <img
+                              width={"60"}
+                              height={"60"}
+                              src={`${baseurl}${news.imageUrls[0]}`}
+                              alt=" "
+                            />{" "}
+                            <span class="badge text-bg-secondary">
+                              {news?.imageUrls.length > 1
+                                ? `${news?.imageUrls.length} img's`
+                                : ""}
+                            </span>
                           </>
                         ) : (
                           <img

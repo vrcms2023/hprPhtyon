@@ -11,7 +11,7 @@ import { getBaseURL } from "../../util/ulrUtil";
 
 const Testimonials = ({ testimonis }) => {
   const [index, setIndex] = useState(0);
-  const baseURL = getBaseURL()
+  const baseURL = getBaseURL();
   useEffect(() => {
     if (testimonis.length > 1) {
       const lastIndex = testimonis?.length - 1;
