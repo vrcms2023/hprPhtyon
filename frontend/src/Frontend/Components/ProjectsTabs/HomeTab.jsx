@@ -13,26 +13,32 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
   // console.log("home tab", projectImages[0].imgs[0])
   const { aboutstitle, aboutussubtitle, description, projectTitle } = project;
 
-  const baseURL = getBaseURL()
+  const baseURL = getBaseURL();
 
   const downloadPDF = (path, name) => {
-
-    const navigateTocontactus =() => {
+    const navigateTocontactus = () => {
       removeCookie("previousPath");
       setCookie("previousPath", window.location.pathname);
       navigate(`/contact`);
-    }
+    };
 
     if (getCookie("clientInformation") !== undefined) {
       const link = document.createElement("a");
       link.download = name;
-      link.href = baseURL+path;
+      link.href = baseURL + path;
       link.click();
     } else {
-   
       confirmAlert({
         customUI: ({ onClose }) => {
-          return <DeleteDialog title={"We need some your personal details to download PDF's"} onClose={onClose} callback={navigateTocontactus} label={"to Download PDF's"} buttonStyle={'btn-success'} />;
+          return (
+            <DeleteDialog
+              title={"We need some your personal details to download PDF's"}
+              onClose={onClose}
+              callback={navigateTocontactus}
+              label={"to Download PDF's"}
+              buttonStyle={"btn-success"}
+            />
+          );
         },
       });
     }
@@ -74,7 +80,11 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
 
       <div className="text-center my-5">
         <img
-          src={isProjectImg ? (`${baseURL}${projectImages[0].imgs[0].path}`) : HomeImg}
+          src={
+            isProjectImg
+              ? `${baseURL}${projectImages[0].imgs[0].path}`
+              : HomeImg
+          }
           className="rounded img-fluid w-50"
           alt="..."
         />

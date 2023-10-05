@@ -10,7 +10,6 @@ import { getBaseURL } from "../util/ulrUtil";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../util/cookieUtil";
 
-
 const CatageoryImgC = ({
   title,
   catategoryImgs,
@@ -24,21 +23,23 @@ const CatageoryImgC = ({
     "clientInformation",
   ]);
   const navigate = useNavigate();
-  const baseURL = getBaseURL()
+  const baseURL = getBaseURL();
   const { userInfo } = useSelector((state) => state.auth);
 
   /**
    * get selected Images for edit
    */
   useEffect(() => {
-
     const getSelectedImages = async () => {
-      const response = await axiosServiceApi.get(`/gallery/getSelectedImagesById/`,{
-        params: {
-          projectID: project.id,
-          category:category
-        }
-      });
+      const response = await axiosServiceApi.get(
+        `/gallery/getSelectedImagesById/`,
+        {
+          params: {
+            projectID: project.id,
+            category: category,
+          },
+        },
+      );
       if (response?.status == 200 && response?.data?.fileData?.length > 0) {
         catategoryImgState(response.data.fileData);
       }
@@ -55,27 +56,32 @@ const CatageoryImgC = ({
       );
       if (response.status == 204) {
         const list = catategoryImgs.filter((item) => item.id !== id);
-        catategoryImgState(list)
+        catategoryImgState(list);
       }
     };
     confirmAlert({
       customUI: ({ onClose }) => {
-        return <DeleteDialog onClose={onClose} callback={deleteImageByID} message={`deleting the ${name} image?`}/>;
+        return (
+          <DeleteDialog
+            onClose={onClose}
+            callback={deleteImageByID}
+            message={`deleting the ${name} image?`}
+          />
+        );
       },
     });
   };
 
   const downloadPDF = (url) => {
-
     if (userInfo || getCookie("access")) {
-      return true
+      return true;
     }
-   
-    const navigateTocontactus =() => {
+
+    const navigateTocontactus = () => {
       removeCookie("previousPath");
       setCookie("previousPath", window.location.pathname);
       navigate(`/contact`);
-    }
+    };
 
     if (cookies.clientInformation !== undefined) {
       window.open(
@@ -86,7 +92,15 @@ const CatageoryImgC = ({
     } else {
       confirmAlert({
         customUI: ({ onClose }) => {
-          return <DeleteDialog title={"We need some your personal details to download PDF's"} onClose={onClose} callback={navigateTocontactus} label={"to Download PDF's"} buttonStyle={'btn-success'} />;
+          return (
+            <DeleteDialog
+              title={"We need some your personal details to download PDF's"}
+              onClose={onClose}
+              callback={navigateTocontactus}
+              label={"to Download PDF's"}
+              buttonStyle={"btn-success"}
+            />
+          );
         },
       });
     }
@@ -108,14 +122,14 @@ const CatageoryImgC = ({
 </svg> */}
                       <a
                         href="#!"
-                        onClick={() =>
-                          downloadPDF(`${baseURL}${item.path}`)
-                        }
+                        onClick={() => downloadPDF(`${baseURL}${item.path}`)}
                         className="mx-1 text-dark"
                       >
                         {item.originalname}
                       </a>
-                      <span onClick={() => thumbDelete(item.id, item.originalname)}>
+                      <span
+                        onClick={() => thumbDelete(item.id, item.originalname)}
+                      >
                         <i
                           className="fa fa-trash-o fs-4 text-danger"
                           aria-hidden="true"

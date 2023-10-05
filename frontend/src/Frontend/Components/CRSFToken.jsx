@@ -25,7 +25,6 @@ const CSRFToken = () => {
       setcrsfTokenValue(getCookie("csrftoken"));
     };
     getcsrfToken();
-    
   }, []);
 
   return (

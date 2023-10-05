@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { axiosServiceApi } from "../../../util/axiosUtil";
 import { toast } from "react-toastify";
 
-
 const ContactUSAdmin = () => {
   const [userDetails, setUserDetails] = useState([]);
 
@@ -31,8 +30,6 @@ const ContactUSAdmin = () => {
     getAllUserDetails();
   }, []);
 
-
-
   return (
     <div className="container-fluid pt-5" style={{ marginTop: "120px" }}>
       <div className="row px-3 px-lg-5">
@@ -51,28 +48,26 @@ const ContactUSAdmin = () => {
       </div>
 
       <div className="row px-3 px-lg-5 py-4 table-responsive">
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>FirstName</th>
-                <th>Email</th>
-                <th>phoneNumber</th>
-                <th>description</th>
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>FirstName</th>
+              <th>Email</th>
+              <th>phoneNumber</th>
+              <th>description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userDetails?.map((user) => (
+              <tr key={user.id}>
+                <td>{user.firstName}</td>
+                <td>{user.email}</td>
+                <td>{user.phoneNumber}</td>
+                <td>{user.description} </td>
               </tr>
-            </thead>
-            <tbody>
-              {userDetails?.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.firstName}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phoneNumber}</td>
-                  <td>{user.description} </td>
-
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

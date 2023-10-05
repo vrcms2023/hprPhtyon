@@ -25,25 +25,26 @@ const Specifications = ({
 
   const handleDelete = (i) => {
     const selectedSpecification = [...specifications][i];
-    const deleteSpecifications = async() => {
+    const deleteSpecifications = async () => {
       const deleteVal = [...specifications];
-      const objId = deleteVal[i].id
-      
-      if(objId !== undefined){
-        try{
-          const response = await axiosServiceApi.delete(`/project/deleteSpecifications/${objId}/` );
-          if(response.status === 204){
+      const objId = deleteVal[i].id;
+
+      if (objId !== undefined) {
+        try {
+          const response = await axiosServiceApi.delete(
+            `/project/deleteSpecifications/${objId}/`,
+          );
+          if (response.status === 204) {
             toast.success(`${deleteVal[i].title} is deleted`);
             deleteVal.splice(i, 1);
-         }
-        }catch(error){
+          }
+        } catch (error) {
           toast.error(`${deleteVal[i].title} unable to deleted`);
         }
-        
-      }else {
+      } else {
         deleteVal.splice(i, 1);
       }
-      
+
       setSpecifications(deleteVal);
     };
 
@@ -108,7 +109,7 @@ const Specifications = ({
                       id="specificationName"
                       placeholder="Feature title"
                       name="title"
-                      value={val.title ? val.title : ''}
+                      value={val.title ? val.title : ""}
                       onChange={(e) => handleChange(e, i)}
                     />
                     <textarea
@@ -116,7 +117,7 @@ const Specifications = ({
                       id="specificationDescription"
                       rows="3"
                       name="feature"
-                      value={val.feature ? val.feature : ''}
+                      value={val.feature ? val.feature : ""}
                       onChange={(e) => handleChange(e, i)}
                     ></textarea>
                   </td>
@@ -131,21 +132,21 @@ const Specifications = ({
                 </tr>
               ))
             ) : (
-              <tr><td>
-                
-               
-              <div className="d-flex justify-content-center align-items-center flex-column">
-                <Button
-                  type="submit"
-                  cssClass="btn btn-success mb-2"
-                  label="ADD"
-                  handlerChange={handleClick}
-                />
-                <p className="text-center text-warning fs-4 m-0">
-                  "Click on button to add specifications"
-                </p>
-              </div>
-              </td></tr>
+              <tr>
+                <td>
+                  <div className="d-flex justify-content-center align-items-center flex-column">
+                    <Button
+                      type="submit"
+                      cssClass="btn btn-success mb-2"
+                      label="ADD"
+                      handlerChange={handleClick}
+                    />
+                    <p className="text-center text-warning fs-4 m-0">
+                      "Click on button to add specifications"
+                    </p>
+                  </div>
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

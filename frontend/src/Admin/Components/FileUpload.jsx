@@ -30,14 +30,13 @@ const FileUpload = ({
   descriptionTitle,
   showDescription = false,
   maxFiles,
-  buttonLable
+  buttonLable,
 }) => {
   const [files, setFiles] = useState([]);
   const [extTypes, setExtTypes] = useState([]);
   const backendURL = getBaseURL();
-  const accessToken  = useState(getCookie("access"))
-  const [imageDescription, setimageDescription] = useState('');
-  
+  const accessToken = useState(getCookie("access"));
+  const [imageDescription, setimageDescription] = useState("");
 
   useEffect(() => {
     let extArr = validTypes.split(",");
@@ -59,57 +58,55 @@ const FileUpload = ({
     }
   };
 
-  useEffect(()=>{
-    if(files.length > 0 && !showDescription){
-      uploadFile()
+  useEffect(() => {
+    if (files.length > 0 && !showDescription) {
+      uploadFile();
     }
+  }, [files, showDescription]);
 
-  },[files,showDescription])
-
-  const uploadFile = async() =>{
+  const uploadFile = async () => {
     const arrURL = [];
 
     files.forEach((element, index) => {
-      let formData = new FormData()
-      formData.append('path', element.file)
-      formData.append('projectID', project?.id);
-      formData.append('category', category);
-      formData.append('imageTitle', '');
-      formData.append('imageDescription', imageDescription);
-      formData.append('created_by', getCookie("userName"));
-      formData.append('updated_By', getCookie("userName"));
+      let formData = new FormData();
+      formData.append("path", element.file);
+      formData.append("projectID", project?.id);
+      formData.append("category", category);
+      formData.append("imageTitle", "");
+      formData.append("imageDescription", imageDescription);
+      formData.append("created_by", getCookie("userName"));
+      formData.append("updated_By", getCookie("userName"));
 
-      arrURL.push(axiosFileUploadServiceApi.post(`/gallery/createGallery/`,formData));
-
+      arrURL.push(
+        axiosFileUploadServiceApi.post(`/gallery/createGallery/`, formData),
+      );
     });
     try {
       await Promise.all(arrURL).then(function (values) {
-        updatedFileChnages(values)
+        updatedFileChnages(values);
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
 
-  }
+  const updatedFileChnages = (response) => {
+    const imgarr = [];
+    response.forEach((item, i) => {
+      const imageResponse = item.data.imageModel;
+      const img = {
+        id: imageResponse.id,
+        originalname: imageResponse.originalname,
+        path: imageResponse.path,
+        contentType: imageResponse.contentType,
+      };
+      imgarr.push(img);
+    });
 
-  const updatedFileChnages = (response)=>{
-      const imgarr = []
-      response.forEach((item, i) => {
-          const imageResponse = item.data.imageModel;
-          const img = {
-            id: imageResponse.id,
-            originalname: imageResponse.originalname,
-            path: imageResponse.path,
-            contentType: imageResponse.contentType,
-          };
-          imgarr.push(img)
-      })
-
-      gallerysetState([...galleryState, ...imgarr]);
-      setimageDescription('')
-      setFiles([]);
-  }
-
+    gallerysetState([...galleryState, ...imgarr]);
+    setimageDescription("");
+    setFiles([]);
+  };
 
   const onerror = (error) => {
     if (error.type) {
@@ -117,32 +114,32 @@ const FileUpload = ({
     }
   };
   const changeHandler = (e) => {
-    setimageDescription( e.target.value );
+    setimageDescription(e.target.value);
   };
 
   return (
-   
     <>
       <Title title={title} cssClass="fs-6 fw-bold" />
       <div className="border border-3 mb-4 shadow-lg">
         {/* <label htmlFor="addImages" className="form-label  ">Add Image's</label> */}
         {/* <input className="form-control" type="file" id="addImages" multiple />  */}
-        
+
         <FilePond
-            labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-            labelInvalidField="invalid files"
-            name="path"
-            files={files}
-            onerror={onerror}
-            onupdatefiles={setFiles}
-            allowMultiple={true}
-            maxFiles={maxFiles ? maxFiles :4}
-            maxParallelUploads={4}
-            disabled={disabledFile}
-            credits={false}
-            acceptedFileTypes={extTypes}
-            instantUpload={false}/>
-          
+          labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+          labelInvalidField="invalid files"
+          name="path"
+          files={files}
+          onerror={onerror}
+          onupdatefiles={setFiles}
+          allowMultiple={true}
+          maxFiles={maxFiles ? maxFiles : 4}
+          maxParallelUploads={4}
+          disabled={disabledFile}
+          credits={false}
+          acceptedFileTypes={extTypes}
+          instantUpload={false}
+        />
+
         {/* <FilePond
           name="path"
           files={files}
@@ -181,25 +178,26 @@ const FileUpload = ({
           labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
           labelInvalidField="invalid files"
         /> */}
-    
       </div>
       {showDescription ? (
-      <div className="py-3">
-      <Title title={descriptionTitle ? descriptionTitle : "Image desccription"} cssClass="fs-5 fw-bold" />
-      <div className="row">
-      <div className="col-8">
-        {/* <label htmlFor="addImages" className="form-label  ">Add Image's</label> */}
-        <textarea
-          className="form-control"
-          name={'imageDescription'}
-          value={imageDescription}
-          onChange={(e) => changeHandler(e)}
-          id="amenitiesDescription"
-          rows="2"
-        ></textarea>
-        
-      </div>
-      <div className="col-4 text-center ">
+        <div className="py-3">
+          <Title
+            title={descriptionTitle ? descriptionTitle : "Image desccription"}
+            cssClass="fs-5 fw-bold"
+          />
+          <div className="row">
+            <div className="col-8">
+              {/* <label htmlFor="addImages" className="form-label  ">Add Image's</label> */}
+              <textarea
+                className="form-control"
+                name={"imageDescription"}
+                value={imageDescription}
+                onChange={(e) => changeHandler(e)}
+                id="amenitiesDescription"
+                rows="2"
+              ></textarea>
+            </div>
+            <div className="col-4 text-center ">
               <Button
                 type="submit"
                 cssClass="btn btn-success mx-2"
@@ -207,10 +205,11 @@ const FileUpload = ({
                 handlerChange={uploadFile}
               />
             </div>
-      </div>
-      
-          
-          </div>) : ('')}
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

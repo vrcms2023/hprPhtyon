@@ -53,23 +53,22 @@ const MainPage = () => {
         ) : (
           ""
         )}
-         <li className="list-group-item list-group-item-action text-center border-secondary py-3">
-            <Link
-              to="/change_password"
-              className="blue-500 text-decoration-none fs-4"
-            >
+        <li className="list-group-item list-group-item-action text-center border-secondary py-3">
+          <Link
+            to="/change_password"
+            className="blue-500 text-decoration-none fs-4"
+          >
             Change Password
-            </Link>
-          </li>
-          <li className="list-group-item list-group-item-action text-center border-secondary py-3">
-            <Link
-              to="/contactUSList"
-              className="blue-500 text-decoration-none fs-4"
-            >
+          </Link>
+        </li>
+        <li className="list-group-item list-group-item-action text-center border-secondary py-3">
+          <Link
+            to="/contactUSList"
+            className="blue-500 text-decoration-none fs-4"
+          >
             Contact US
-            </Link>
-          </li>
-          
+          </Link>
+        </li>
       </ul>
     </div>
   );

@@ -41,7 +41,7 @@ export const getImagesByDate = (img) => {
 };
 
 export const sortByDate = (array) => {
-  return array.sort(function(a,b){
+  return array.sort(function (a, b) {
     return new Date(b.created_at) - new Date(a.created_at);
   });
-}
+};

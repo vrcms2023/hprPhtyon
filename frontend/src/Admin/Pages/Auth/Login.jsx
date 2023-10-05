@@ -10,7 +10,7 @@ import {
   removeAllCookies,
   removeCookie,
   setCookie,
-  getCookie
+  getCookie,
 } from "../../../util/cookieUtil";
 
 import "./Login.css";
@@ -42,10 +42,9 @@ const Login = () => {
       setCookie("is_appAccess", JSON.parse(userInfo.is_appAccess));
       navigate("/main");
     } else {
-      if(getCookie("email")){
+      if (getCookie("email")) {
         removeAllCookies();
       }
-      
     }
   }, [userInfo]);
 

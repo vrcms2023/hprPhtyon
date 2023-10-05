@@ -8,10 +8,13 @@ export const userLogin = createAsyncThunk(
     try {
       // configure header's Content-Type as JSON
 
-      const { data } = await axiosClientServiceApi.post(`/user/auth/jwt/create/`, {
-        email,
-        password,
-      });
+      const { data } = await axiosClientServiceApi.post(
+        `/user/auth/jwt/create/`,
+        {
+          email,
+          password,
+        },
+      );
 
       // store user's token in local storage
       localStorage.setItem("access", data.access);

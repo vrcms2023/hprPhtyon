@@ -90,19 +90,22 @@ const Dashboard = () => {
     return projList;
   };
 
-  const callService = async(id, data, project, message) =>{
-    try{
+  const callService = async (id, data, project, message) => {
+    try {
       const response = await axiosServiceApi.patch(
-        `/project/archiveProject/${id}/`,data
+        `/project/archiveProject/${id}/`,
+        data,
       );
       if (response.data?.projectList?.length > 0) {
         toast.success(`${project.projectTitle} ${message}`);
         updateProjects(response.data.projectList);
       }
-    }catch(error){
-      toast.error(`${project.projectTitle} project unabel to process your request`);
+    } catch (error) {
+      toast.error(
+        `${project.projectTitle} project unabel to process your request`,
+      );
     }
-  }
+  };
 
   /**
    * Delete project form Dashboard
@@ -112,9 +115,9 @@ const Dashboard = () => {
   const handleProjectDelete = (project, id) => {
     const deleteDashBoardProject = async () => {
       const data = {
-        isActive : false
-      }
-      callService(id, data, project, "project Deleted")
+        isActive: false,
+      };
+      callService(id, data, project, "project Deleted");
     };
 
     confirmAlert({
@@ -138,9 +141,9 @@ const Dashboard = () => {
   const reStoreProject = (project, id) => {
     const reStoreDashBoardProject = async () => {
       const data = {
-        isActive : true
-      }
-      callService(id, data, project, "project restore successfully")
+        isActive: true,
+      };
+      callService(id, data, project, "project restore successfully");
     };
 
     confirmAlert({

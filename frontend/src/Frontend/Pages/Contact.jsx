@@ -12,7 +12,12 @@ import { getCookie, removeCookie, setCookie } from "../../util/cookieUtil";
 import { removeActiveClass } from "../../util/ulrUtil";
 
 const Contact = () => {
-  const formObject = { firstName: "", email: "", phoneNumber: "", description: "" };
+  const formObject = {
+    firstName: "",
+    email: "",
+    phoneNumber: "",
+    description: "",
+  };
   const [formData, setFormData] = useState(formObject);
   const [mesg, setMesg] = useState("");
   const [show, setShow] = useState(false);
@@ -37,24 +42,22 @@ const Contact = () => {
     const errors = validationform(formData);
     setFormerror(errors);
     if (Object.keys(errors).length > 0) return;
-    try{
-      const response = await axiosClientServiceApi.post(`/contactus/`,{
+    try {
+      const response = await axiosClientServiceApi.post(`/contactus/`, {
         ...formData,
-      },
-    );
-    if (response.status === 201) {
-      toast.success("Your request is submit succuessfully");
-      removeCookie("clientInformation");
-      setCookie("clientInformation", formData.email, { maxAge: 86400 });
-      setFormData(formObject);
-      setFormerror("");
-    } else {
+      });
+      if (response.status === 201) {
+        toast.success("Your request is submit succuessfully");
+        removeCookie("clientInformation");
+        setCookie("clientInformation", formData.email, { maxAge: 86400 });
+        setFormData(formObject);
+        setFormerror("");
+      } else {
+        toast.error("unable to process your request");
+      }
+    } catch (error) {
       toast.error("unable to process your request");
     }
-    } catch(error){
-      toast.error("unable to process your request");
-    }
-   
   };
   const validationform = (value) => {
     const errors = {};

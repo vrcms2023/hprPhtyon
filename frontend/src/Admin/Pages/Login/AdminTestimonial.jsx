@@ -20,7 +20,9 @@ import { getBaseURL } from "../../../util/ulrUtil";
 export const AdminTestimonial = () => {
   const navigate = useNavigate();
   const [testimonialObject, setTestimonialObject] = useState([]);
-  const [testimonialProject, setTestimonialProject] = useState({id :uuidv4()});
+  const [testimonialProject, setTestimonialProject] = useState({
+    id: uuidv4(),
+  });
   const testimonialKeys = { title: "", description: "" };
   const [testimonialState, setTestimonialState] = useState(testimonialKeys);
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,8 +30,7 @@ export const AdminTestimonial = () => {
   const [id, setID] = useState("");
   const [userName, setUserName] = useState("");
   const [disabledFile, setDisabledFile] = useState(false);
-  const baseurl = getBaseURL()
-
+  const baseurl = getBaseURL();
 
   useEffect(() => {
     setUserName(getCookie("userName"));
@@ -45,13 +46,13 @@ export const AdminTestimonial = () => {
 
   const generateUUID = () => {
     return uuidv4();
-  }
+  };
 
   const cancelHandler = () => {
     setTestimonialState(testimonialKeys);
     setTestimonialProject({
       id: generateUUID(),
-    })
+    });
     setEditState(false);
     setTestimonialObject([]);
   };
@@ -64,7 +65,7 @@ export const AdminTestimonial = () => {
     );
     if (response?.status == 200 && response.data?.testimonial?.length > 0) {
       const listReverseOrder = response.data.testimonial;
-      const sortData = sortByDate(listReverseOrder)
+      const sortData = sortByDate(listReverseOrder);
       setTestimonialList(sortData);
     } else {
       setTestimonialList([]);
@@ -105,29 +106,36 @@ export const AdminTestimonial = () => {
       imageUrl: testimonialObject[0]?.path ? testimonialObject[0].path : null,
       updated_By: userName,
       id: id,
-      created_by : testimonialProject?.created_by ? testimonialProject?.created_by : userName
+      created_by: testimonialProject?.created_by
+        ? testimonialProject?.created_by
+        : userName,
     };
-    
-    
+
     try {
       let response = "";
-        if(editState){
-          testimonial.updated_By = userName
-          response = await axiosServiceApi.put(`/testimonials/updateTestimonials/${id}/`, {
+      if (editState) {
+        testimonial.updated_By = userName;
+        response = await axiosServiceApi.put(
+          `/testimonials/updateTestimonials/${id}/`,
+          {
             ...testimonial,
-          });
-        } else {
-          response = await axiosServiceApi.post(`/testimonials/createTestimonials/`, {
+          },
+        );
+      } else {
+        response = await axiosServiceApi.post(
+          `/testimonials/createTestimonials/`,
+          {
             ...testimonial,
-          });
-        }
-      if (response?.status == 200 || response?.status == 201 ) {
+          },
+        );
+      }
+      if (response?.status == 200 || response?.status == 201) {
         toast.success(
           `${testimonialState.title} news ${editState ? "Update" : "created"}`,
         );
         setEditState(false);
         setTestimonialState(testimonialKeys);
-        setTestimonialProject({id: generateUUID()})
+        setTestimonialProject({ id: generateUUID() });
         setTestimonialObject([]);
         getTestimonialList();
       } else {
@@ -137,8 +145,6 @@ export const AdminTestimonial = () => {
       toast.error("Unable to save the testimonial");
     }
   };
-
- 
 
   const handleTestimonialEdit = (event, testimonial) => {
     event.preventDefault();
@@ -157,9 +163,9 @@ export const AdminTestimonial = () => {
       description: description,
     };
     const galleryObj = {
-      id : projectID,
-      category : 'testimonial'
-    }
+      id: projectID,
+      category: "testimonial",
+    };
     setTestimonialProject(galleryObj);
     setTestimonialState(testimonialObj);
     setEditState(true);
@@ -170,7 +176,7 @@ export const AdminTestimonial = () => {
   const handleNewsDelete = (event, testimonial) => {
     event.preventDefault();
     const deleteSelectedNews = async () => {
-      try{
+      try {
         const response = await axiosServiceApi.delete(
           `/testimonials/updateTestimonials/${testimonial.id}/`,
         );
@@ -185,10 +191,9 @@ export const AdminTestimonial = () => {
           setTestimonialObject([]);
           getTestimonialList();
         }
-      } catch(error) {
+      } catch (error) {
         toast.error("Unable to Delete testimonial");
       }
-      
     };
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -197,7 +202,6 @@ export const AdminTestimonial = () => {
             onClose={onClose}
             callback={deleteSelectedNews}
             message={`deleting the ${testimonial.title} testimonial?`}
-
           />
         );
       },

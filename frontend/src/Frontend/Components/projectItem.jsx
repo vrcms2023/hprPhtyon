@@ -3,10 +3,9 @@ import Title from "../../Common/Title";
 import { Link, useNavigate } from "react-router-dom";
 import { getBaseURL } from "../../util/ulrUtil";
 
-
 const ProjectItem = ({ projectList, projectType }) => {
   const navigate = useNavigate();
-  const baseURL = getBaseURL()
+  const baseURL = getBaseURL();
   return (
     <div className="container my-5 pb-3">
       <div className="row">
@@ -51,7 +50,10 @@ const ProjectItem = ({ projectList, projectType }) => {
                   {project.imgs.length > 0 ? (
                     <img src={`${baseURL}${project.imgs[0].path}`} alt="" />
                   ) : (
-                    <img src={`${baseURL}/media/images/dummy-image-square.png`} alt="" />
+                    <img
+                      src={`${baseURL}/media/images/dummy-image-square.png`}
+                      alt=""
+                    />
                   )}
                 </div>
               </div>

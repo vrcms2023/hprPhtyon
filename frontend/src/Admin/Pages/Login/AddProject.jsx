@@ -35,7 +35,12 @@ const AddProject = () => {
   };
   const [aboutUs, setAboutUs] = useState(about);
   const specificationKeys = { title: null, feature: null };
-  const amenitieKeys = {id:"", amenitie: null, feature: null, googleMap: null };
+  const amenitieKeys = {
+    id: "",
+    amenitie: null,
+    feature: null,
+    googleMap: null,
+  };
   const [specifications, setSpecifications] = useState([specificationKeys]);
   const [amenities, setAmenities] = useState(amenitieKeys);
   const [pdfObject, setPdfObject] = useState([]);
@@ -48,7 +53,7 @@ const AddProject = () => {
   const [projectTitleErrorMessage, setProjectTitleErrorMessage] = useState("");
   const [projectPublish, setProjectPublish] = useState(false);
 
-const [tempFile, setTempFile] = useState();
+  const [tempFile, setTempFile] = useState();
 
   const { id } = useParams();
 
@@ -64,9 +69,7 @@ const [tempFile, setTempFile] = useState();
    */
   useEffect(() => {
     const getPorjectCategory = async () => {
-      const response = await axiosServiceApi.get(
-        `/project/categorylist/`,
-      );
+      const response = await axiosServiceApi.get(`/project/categorylist/`);
       if (response?.status == 200) {
         setDefaultProjectType(response.data);
       } else {
@@ -139,7 +142,6 @@ const [tempFile, setTempFile] = useState();
    * Add project handler
    */
   async function addNewProject(event) {
-    
     if (projectName === "") {
       setProjectTitleErrorMessage("Please add a project name");
       return;
@@ -207,7 +209,9 @@ const [tempFile, setTempFile] = useState();
           imageDescription: project.imageDescription,
         };
         setAboutUs(aboutus);
-        setPercentValue(project.percentValue ? JSON.parse(project.percentValue): null);
+        setPercentValue(
+          project.percentValue ? JSON.parse(project.percentValue) : null,
+        );
         setProjectPublish(
           project.publish ? JSON.parse(project.publish) : false,
         );
@@ -222,73 +226,86 @@ const [tempFile, setTempFile] = useState();
   }, [id]);
 
   async function saveProject() {
-
-    const basicDetail ={
+    const basicDetail = {
       ...newProject,
       ...getProjectStatus(),
       ...getAboutUsStatus(),
       projectTitle: projectName,
       updated_By: userName,
       percentValue: percentValue,
-    }
-    const basicProjectDetails =  axiosServiceApi.put(`/project/editProject/${newProject.id}/`,basicDetail);
+    };
+    const basicProjectDetails = axiosServiceApi.put(
+      `/project/editProject/${newProject.id}/`,
+      basicDetail,
+    );
 
     const amenitiesData = {
       projectID: newProject.id,
       updated_By: userName,
-      amenitie : amenities.amenitie,
-      feature : amenities.feature,
-      googleMap : amenities.googleMap,
+      amenitie: amenities.amenitie,
+      feature: amenities.feature,
+      googleMap: amenities.googleMap,
+    };
+
+    let amenitiesDeatils = "";
+
+    if (amenities.id === "") {
+      amenitiesDeatils = axiosServiceApi.post(
+        `/project/amenities/`,
+        amenitiesData,
+      );
+    } else {
+      amenitiesDeatils = axiosServiceApi.put(
+        `/project/getAmenitiesById/${newProject.id}/`,
+        amenitiesData,
+      );
     }
 
-    let amenitiesDeatils = ""
-
-    if(amenities.id === '') {
-      amenitiesDeatils =  axiosServiceApi.post(`/project/amenities/`, amenitiesData);
-    } else{
-      amenitiesDeatils =  axiosServiceApi.put(`/project/getAmenitiesById/${newProject.id}/`, amenitiesData);
-    }
-    
-    let listOfexitSpecifications = []
-    let listOfnewSpecifications = []
+    let listOfexitSpecifications = [];
+    let listOfnewSpecifications = [];
     specifications.forEach((item) => {
-      if(item.id){
+      if (item.id) {
         const specification = {
-          id : item.id,
+          id: item.id,
           projectID: newProject.id,
           updated_By: userName,
-          title : item.title,
-          feature : item.feature
-      }
-      listOfexitSpecifications.push(specification)
-      }else{
+          title: item.title,
+          feature: item.feature,
+        };
+        listOfexitSpecifications.push(specification);
+      } else {
         const specification = {
           projectID: newProject.id,
           updated_By: userName,
           created_by: userName,
-          title : item.title,
-          feature : item.feature
+          title: item.title,
+          feature: item.feature,
+        };
+        listOfnewSpecifications.push(specification);
       }
-      listOfnewSpecifications.push(specification);
-      }
-     
-    })
-    const url = [basicProjectDetails,amenitiesDeatils]
+    });
+    const url = [basicProjectDetails, amenitiesDeatils];
 
-    let newspecification = null
-    let exitSpecification = null
-    if(listOfnewSpecifications.length > 0) {
-      newspecification =  axiosServiceApi.post(`/project/specification/`, listOfnewSpecifications);
-      url.push(newspecification)
-    } 
-    if(listOfexitSpecifications.length > 0){
-      exitSpecification =  axiosServiceApi.put(`/project/updatespecification/${newProject.id}/`, listOfexitSpecifications);
-      url.push(exitSpecification)
+    let newspecification = null;
+    let exitSpecification = null;
+    if (listOfnewSpecifications.length > 0) {
+      newspecification = axiosServiceApi.post(
+        `/project/specification/`,
+        listOfnewSpecifications,
+      );
+      url.push(newspecification);
+    }
+    if (listOfexitSpecifications.length > 0) {
+      exitSpecification = axiosServiceApi.put(
+        `/project/updatespecification/${newProject.id}/`,
+        listOfexitSpecifications,
+      );
+      url.push(exitSpecification);
     }
 
-
-    try{
-      const [projects, amenitie, specification, updateSpecification] = await Promise.all(url)
+    try {
+      const [projects, amenitie, specification, updateSpecification] =
+        await Promise.all(url);
       // console.log({
       //   projects : projects,
       //   amenitie : amenitie,
@@ -298,36 +315,34 @@ const [tempFile, setTempFile] = useState();
       const project = projects?.data?.project;
       toast.success(`${project.projectTitle} Project Update`);
       setProjectName(project.projectTitle);
-      setAmenities(amenitie?.data?.amenitie)
+      setAmenities(amenitie?.data?.amenitie);
       const newSpecification = [];
-      mapList(newSpecification, specification?.data?.specification )
-      mapList(newSpecification, updateSpecification?.data?.specification)
-      setSpecifications(newSpecification)
+      mapList(newSpecification, specification?.data?.specification);
+      mapList(newSpecification, updateSpecification?.data?.specification);
+      setSpecifications(newSpecification);
       window.scrollTo(0, 0);
-      
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-    
-    function mapList(arr, list){
-      if(list && list.length > 0) {
+
+    function mapList(arr, list) {
+      if (list && list.length > 0) {
         list.forEach((item) => {
-          arr.push(item)
-        })
+          arr.push(item);
+        });
       }
     }
-
   }
-
 
   const publishHandler = async () => {
     const publishProject = async () => {
       const data = {
-        publish : !projectPublish,
-        isActive : true
-      }
+        publish: !projectPublish,
+        isActive: true,
+      };
       const response = await axiosServiceApi.patch(
-        `/project/publishProject/${newProject.id}/`, data
+        `/project/publishProject/${newProject.id}/`,
+        data,
       );
       if (response.status === 200) {
         const publisher = JSON.parse(response.data.project.publish);
@@ -344,21 +359,19 @@ const [tempFile, setTempFile] = useState();
           <DeleteDialog
             onClose={onClose}
             callback={publishProject}
-            message={`you wish to ${projectPublish ?  "unPublished" : "published"} the project without savign your changes`}
-            label = {projectPublish ?  "unPublished" : "published"}
-
+            message={`you wish to ${
+              projectPublish ? "unPublished" : "published"
+            } the project without savign your changes`}
+            label={projectPublish ? "unPublished" : "published"}
           />
         );
       },
     });
-
-
   };
-
 
   return (
     <div className="container-fluid pt-5" style={{ marginTop: "100px" }}>
-      <CSRFToken/>
+      <CSRFToken />
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between align-items-center flex-column flex-md-row">
           <Title
@@ -399,7 +412,10 @@ const [tempFile, setTempFile] = useState();
               {defaultProjectType?.length
                 ? defaultProjectType?.map((option, index) => {
                     return (
-                      <option key={option.idprojectcategories} value={option.projectValue}>
+                      <option
+                        key={option.idprojectcategories}
+                        value={option.projectValue}
+                      >
                         {option.projectLabel}
                       </option>
                     );
@@ -475,11 +491,11 @@ const [tempFile, setTempFile] = useState();
               )}
               <div>
                 <Button
-                type="submit"
-                cssClass="btn btn-success mx-2"
-                label={id ? "Update Project" : "Save Project"}
-                handlerChange={saveProject}
-              />
+                  type="submit"
+                  cssClass="btn btn-success mx-2"
+                  label={id ? "Update Project" : "Save Project"}
+                  handlerChange={saveProject}
+                />
                 {projectPublish ? (
                   <Button
                     type="submit"
@@ -587,7 +603,7 @@ const [tempFile, setTempFile] = useState();
                       <input
                         type="text"
                         className="form-control"
-                        value={projectName ?projectName :""}
+                        value={projectName ? projectName : ""}
                         onChange={titleInputHandleChange}
                         id="projectName"
                         placeholder="Add Project Name"
@@ -608,7 +624,10 @@ const [tempFile, setTempFile] = useState();
                         {defaultProjectType?.length
                           ? defaultProjectType?.map((option, index) => {
                               return (
-                                <option key={option.idprojectcategories} value={option.projectValue}>
+                                <option
+                                  key={option.idprojectcategories}
+                                  value={option.projectValue}
+                                >
                                   {option.projectLabel}
                                 </option>
                               );
@@ -662,7 +681,9 @@ const [tempFile, setTempFile] = useState();
                         type="text"
                         className="form-control"
                         name="aboutussubtitle"
-                        value={aboutUs.aboutussubtitle ? aboutUs.aboutussubtitle : ''}
+                        value={
+                          aboutUs.aboutussubtitle ? aboutUs.aboutussubtitle : ""
+                        }
                         onChange={changeHandler}
                         id="aboutussubtitle"
                       />
@@ -677,7 +698,7 @@ const [tempFile, setTempFile] = useState();
                       <textarea
                         className="form-control"
                         name="description"
-                        value={aboutUs.description ? aboutUs.description : ''}
+                        value={aboutUs.description ? aboutUs.description : ""}
                         onChange={changeHandler}
                         id="projectDescription"
                         rows="3"
@@ -693,7 +714,6 @@ const [tempFile, setTempFile] = useState();
                   role="tabpanel"
                   aria-labelledby="v-pills-profile-tab"
                 >
-                
                   <div className="mb-3">
                     <label className="form-label">Add PDF's (Upload PDF)</label>
                     <FileUpload
@@ -843,14 +863,16 @@ const [tempFile, setTempFile] = useState();
                 >
                   <div className="mb-3">
                     <label htmlFor="imageDescription" className="form-label  ">
-                     Recent project status description
+                      Recent project status description
                     </label>
                     <textarea
                       rows={4}
                       cols={40}
                       className="form-control"
                       name="imageDescription"
-                      value={aboutUs.imageDescription ? aboutUs.imageDescription : ''}
+                      value={
+                        aboutUs.imageDescription ? aboutUs.imageDescription : ""
+                      }
                       onChange={changeHandler}
                       id="imageDescription"
                     />
