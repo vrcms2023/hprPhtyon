@@ -5,8 +5,8 @@
 /.pnp
 .pnp.js
 /public/uploads
-#/backend/media/
-#/backend/build/
+/backend/media/
+/backend/build/
 # testing
 /coverage
 
