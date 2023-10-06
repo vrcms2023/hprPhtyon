@@ -7,6 +7,7 @@
 /public/uploads
 /backend/media/
 /backend/build/
+/frontend/build/
 # testing
 /coverage
 
