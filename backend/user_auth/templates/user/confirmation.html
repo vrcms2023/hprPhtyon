@@ -10,33 +10,15 @@
 {% endblock text_body %}
 
 {% block html_body %}
-<p>{% trans "Your account has been created and is ready to use!" %}</p>
+<h4>{% blocktrans %}Hi {{ user }}{% endblocktrans %}</h4>
+<p style="margin-top: 30px;">{% trans "Your account has been created and is ready to use!" %}</p>
 
-<p style="margin-bottom:100px"><a
-    style="display: inline-block; padding: 10px 20px; background-color:   #51ad2d  ; color: white; text-decoration: none;"
+<p style="text-align: center; margin-top: 30px;">
+  <a style="padding: 10px 20px; background-color: #a8c849; color: #165d3d; border: 0; border-radius: 5px; font-size: 18px; cursor: pointer; border: 0px solid #165d3d; font-weight: bold" 
     href="{{ protocol }}://{{ domain }}/login">Login to Account</a></p>
 
-<span>Follow us: </span>
-<div style="display: flex; justify-content: center; align-items: center;">
-  <a href="#"
-    style="margin: 5px; padding: 5px ; border-radius: 10%; background-color: #E1306C; color: white; text-decoration: none; font-size:10px">
-    Instagram
-  </a>
-  <a href="#"
-    style="margin: 5px; padding: 5px ; border-radius: 10%; background-color: #1da1f2; color: white; text-decoration: none; font-size:10px">
-    Twitter
-  </a>
-  <a href="#"
-    style="margin: 5px; padding: 5px ; border-radius: 10%; background-color: #0077B5; color: white; text-decoration: none; font-size:10px">
-    LinkedIn
-  </a>
-  <a href="#"
-    style="margin: 5px; padding: 5px ; border-radius: 10%; background-color: #ff0000; color: white; text-decoration: none; font-size:10px">
-    Youtube
-  </a>
-</div>
 
-<i>{% blocktrans %}If you face difficulties in Login to your account kindly contact us on:
-  vrcms@vrcms.com {% endblocktrans %}</i>
+
+<i style="margin-top: 50px; display: block;">{% blocktrans %}If you face difficulties in Login to your account kindly contact us on: contact@hprinfra.com {% endblocktrans %}</i>
 
 {% endblock html_body %}

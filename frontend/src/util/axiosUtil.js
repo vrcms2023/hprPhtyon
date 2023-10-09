@@ -61,7 +61,7 @@ const responseInterceptorErrortHanler = async (error) => {
     window.location = "/login";
   }
   if (error.response.status === 401) {
-    window.location = "/login";
+    return Promise.reject(error.response.data.detail);
   }
   if (error.response.status === 404) {
     return Promise.reject(error.response.statusText);

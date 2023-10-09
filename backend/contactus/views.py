@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
 from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Create your views here.
@@ -29,11 +30,11 @@ class ContactUSAPIView(generics.CreateAPIView):
         serializer = ContactUSSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            send_mail(
+            email_msg = send_mail(
                 'Thank you contact VRCMS ' + serializer.data["firstName"],
                 serializer.data["description"] + serializer.data["phoneNumber"],
-                "designerkrishna@gmail.com",
-                [serializer.data["email"],"designerkrishna@gmail.com"]
+                settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER, serializer.data["email"], "designerkrishna@gmail.com"]
             )
+            email_msg.send()
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

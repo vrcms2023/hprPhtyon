@@ -34,9 +34,6 @@ const Activation = () => {
       setIsLoading(false);
       if (response.status == 204) {
         setVerified(true);
-        setTimeout(() => {
-          navigate("/login");
-        }, 5000);
       }
     } catch (error) {
       setIsLoading(false);
@@ -52,7 +49,10 @@ const Activation = () => {
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
-          <div className="d-flex flex-column justify-content-center align-items-center">
+          <div
+            className="d-flex flex-column justify-content-center align-items-center"
+            style={{ margin: "100px 0" }}
+          >
             <Title
               title="Verify your Account"
               cssClass="text-center text-dark mb-4 fw-bold fs-4"
@@ -70,7 +70,9 @@ const Activation = () => {
                   {serverError && <Error>{serverError}</Error>}
                 </p>
                 <br />
-                {serverError && <p>Please contact your admin</p>}
+                {serverError && (
+                  <p className="text-center">Please contact your admin</p>
+                )}
               </div>
             )}
             {isLoading ? (
