@@ -1,12 +1,11 @@
-from django.shortcuts import get_object_or_404
 from .models import ContactUS
 from .serializers import ContactUSSerializer
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework import status
-from django.http import Http404
-from django.core.mail import send_mail
+from django.core.mail import  EmailMessage
+from django.template.loader import get_template
+from django.conf import settings
 
 
 # Create your views here.
@@ -29,11 +28,41 @@ class ContactUSAPIView(generics.CreateAPIView):
         serializer = ContactUSSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            send_mail(
-                'Thank you contact VRCMS ' + serializer.data["firstName"],
-                serializer.data["description"] + serializer.data["phoneNumber"],
-                "designerkrishna@gmail.com",
-                [serializer.data["email"],"designerkrishna@gmail.com"]
+           
+            admin_ctx = {
+                'user': serializer.data["firstName"],
+                'description':  serializer.data["description"],
+                'phoneNumber' : serializer.data["phoneNumber"],
+                'email' : serializer.data["email"]
+            }
+            admin_message = get_template('admin_mesg.html').render(admin_ctx)
+            admin_msg = EmailMessage(
+                    serializer.data["firstName"] + ' - Enquiry form' ,
+                    admin_message,
+                    serializer.data["email"],
+                    [settings.EMAIL_HOST_USER]
             )
+            admin_msg.content_subtype ="html"# Main content is now text/html
+            admin_msg.send()
+            
+            client_ctx = {
+                'user': serializer.data["firstName"], 
+            }
+            client_message = get_template('customer-mesg.html').render(client_ctx)
+            client_msg = EmailMessage(
+                   ' Thank you contact VRCMS' ,
+                    client_message,
+                    settings.EMAIL_HOST_USER,
+                    [serializer.data["email"]]
+            )
+            client_msg.content_subtype ="html"# Main content is now text/html
+            client_msg.send()
+            
+            # send_mail(
+            #     'Thank you contact VRCMS ' + serializer.data["firstName"],
+            #     serializer.data["description"] + serializer.data["phoneNumber"],
+            #     serializer.data["email"], 
+            #     [settings.EMAIL_HOST_USER, serializer.data["email"], "designerkrishna@gmail.com"]
+            # )
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

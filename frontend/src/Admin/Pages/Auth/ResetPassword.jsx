@@ -10,13 +10,14 @@ const ResetPassword = () => {
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState(false);
   const resetPassword = async (email) => {
+    reset();
     const body = JSON.stringify(email);
     try {
       const data = await axiosClientServiceApi.post(
         `/user/auth/users/reset_password/`,
         body,
       );
-      if (data.status == 204) {
+      if (data.status === 204) {
         setSuccess(true);
       }
     } catch (error) {

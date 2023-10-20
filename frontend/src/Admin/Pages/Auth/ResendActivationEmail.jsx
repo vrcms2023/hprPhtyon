@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { axiosClientServiceApi } from "../../../util/axiosUtil";
 import Title from "../../../Common/Title";
 import Error from "../../Components/Error";
+import { Link } from "react-router-dom";
 
 const ResendActivationEmail = () => {
   const { register, handleSubmit } = useForm();
@@ -22,7 +23,7 @@ const ResendActivationEmail = () => {
     } catch (error) {
       if (error.email) {
         setServerError(error.email[0]);
-      } else setServerError(error[0]);
+      } else setServerError(error);
     }
   };
 
@@ -55,7 +56,15 @@ const ResendActivationEmail = () => {
                 cssClass="text-center text-dark mb-4 fw-bold fs-4"
               />
               {success ? (
-                <div>Email sent to your resgister email id please check</div>
+                <>
+                  <div>
+                    Email sent to your resgister email id please activate your
+                    account before login
+                  </div>
+                  <div className="mt-3">
+                    Click here to ? <Link to="/login">Login</Link>
+                  </div>
+                </>
               ) : (
                 <>
                   <input

@@ -81,7 +81,7 @@ ROOT_URLCONF = 'vrcmsapi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        'DIRS': [os.path.join(BASE_DIR, 'build'), os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,13 +111,39 @@ DATABASES = {
     }
 }
 
-# Email Configuration
+### ---------------------------- Email Configuration for Local development ----------------------------- ###
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
-EMAIL_USE_TLS = True
+# EMAIL_HOST = os.environ.get('EMAIL_HOST')
+# EMAIL_PORT = os.environ.get('EMAIL_PORT')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = False
+
+# env properties not workign need check later
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'ramajsworks@gmail.com'
+EMAIL_HOST_PASSWORD = 'yacmpavxfgfdtozz'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+
+
+
+
+### ---------------------------- Email Configuration for PRODUCTIONR ----------------------------- ###
+# User creation, activation, change password and contact us Email settings
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_USE_TLS = False
+# EMAIL_HOST = 'cms.hprinfra.com'
+# EMAIL_HOST_USER = 'contact@hprinfra.com'
+# EMAIL_HOST_PASSWORD = 'svIQpoiG?*1$'
+# EMAIL_PORT = 25
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

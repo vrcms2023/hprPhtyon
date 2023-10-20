@@ -31,6 +31,7 @@ export const AdminTestimonial = () => {
   const [userName, setUserName] = useState("");
   const [disabledFile, setDisabledFile] = useState(false);
   const baseurl = getBaseURL();
+  const [saveState, setSaveState] = useState(false);
 
   useEffect(() => {
     setUserName(getCookie("userName"));
@@ -55,6 +56,7 @@ export const AdminTestimonial = () => {
     });
     setEditState(false);
     setTestimonialObject([]);
+    setID(0);
   };
 
   const [testimonialList, setTestimonialList] = useState([]);
@@ -138,6 +140,7 @@ export const AdminTestimonial = () => {
         setTestimonialProject({ id: generateUUID() });
         setTestimonialObject([]);
         getTestimonialList();
+        setID(0);
       } else {
         setErrorMessage(response.data.message);
       }
@@ -224,8 +227,17 @@ export const AdminTestimonial = () => {
 
       <div className="row px-3 px-md-3 mt-4">
         <div className="col-12 col-md-5 col-lg-4">
-          <div className="border border-1 p-4 mb-4 bg-light shadow-lg">
+          <div
+            className={`${
+              editState ? "editModeBorder" : "border border-1"
+            }  p-4 mb-4 bg-light shadow-lg`}
+          >
             {errorMessage && <Error>{errorMessage}</Error>}
+            {editState ? (
+              <div className="mb-2 text-center fs-5 blue-500 ">Edit Mode</div>
+            ) : (
+              ""
+            )}
             <div className="mb-3">
               <label
                 htmlFor="projectDescription"
@@ -270,6 +282,7 @@ export const AdminTestimonial = () => {
                 disabledFile={disabledFile}
                 descriptionTitle=""
                 showDescription={false}
+                saveState={setSaveState}
                 maxFiles={1}
               />
               <CatageoryImgC
@@ -294,6 +307,7 @@ export const AdminTestimonial = () => {
               )}
               <Button
                 type="submit"
+                disabled={saveState}
                 cssClass="btn btn-primary"
                 label={editState ? "Update Testimonial" : "Save Testimonial"}
                 handlerChange={saveTestimonial}
@@ -315,7 +329,12 @@ export const AdminTestimonial = () => {
                 </thead>
                 <tbody>
                   {testimonialList?.map((testimonial) => (
-                    <tr key={testimonial.id}>
+                    <tr
+                      key={testimonial.id}
+                      className={`${
+                        testimonial.id === id ? "editModeBorder" : ""
+                      }`}
+                    >
                       <td className="description">
                         <span className="m-0">{testimonial.title}</span>
                       </td>

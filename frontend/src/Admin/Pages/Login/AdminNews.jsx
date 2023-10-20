@@ -23,9 +23,10 @@ export const AdminNews = () => {
   const [newsState, setnewsState] = useState(newsKeys);
   const [errorMessage, setErrorMessage] = useState("");
   const [editState, setEditState] = useState(false);
-  const [id, setID] = useState("");
+  const [id, setID] = useState(0);
   const [userName, setUserName] = useState("");
   const baseurl = getBaseURL();
+  const [saveState, setSaveState] = useState(false);
 
   useEffect(() => {
     setUserName(getCookie("userName"));
@@ -47,6 +48,7 @@ export const AdminNews = () => {
     });
     setEditState(false);
     setNewsObject([]);
+    setID(0);
   };
 
   const [newsList, setNewsList] = useState([]);
@@ -119,6 +121,7 @@ export const AdminNews = () => {
         });
         setNewsObject([]);
         getNewList();
+        setID(0);
       } else {
         setErrorMessage(response.data.message);
       }
@@ -207,10 +210,19 @@ export const AdminNews = () => {
         </div>
       </div>
 
-      <div className="row px-3 mt-4">
-        <div className="col-12 col-md-5 col-lg-4">
-          <div className="border border-1 p-4 mb-4 bg-light shadow-lg">
+      <div className="row px-3 mt-4 ">
+        <div className="col-12 col-md-5 col-lg-4 ">
+          <div
+            className={`${
+              editState ? "editModeBorder" : "border border-1"
+            }  p-4 mb-4 bg-light shadow-lg`}
+          >
             {errorMessage && <Error>{errorMessage}</Error>}
+            {editState ? (
+              <div className="mb-2 text-center fs-5 blue-500 ">Edit Mode</div>
+            ) : (
+              ""
+            )}
             <div className="mb-3">
               <label htmlFor="projectDescription" className="form-label  ">
                 News Title <span className="text-danger"> *</span>
@@ -245,6 +257,7 @@ export const AdminNews = () => {
                 category="news"
                 gallerysetState={setNewsObject}
                 galleryState={newsObject}
+                saveState={setSaveState}
                 validTypes="image/png,image/jpeg"
               />
               <CatageoryImgC
@@ -269,6 +282,7 @@ export const AdminNews = () => {
               )}
               <Button
                 type="submit"
+                disabled={saveState}
                 cssClass="btn btn-primary"
                 label={editState ? "Update News" : "Save News"}
                 handlerChange={saveProject}
@@ -290,9 +304,12 @@ export const AdminNews = () => {
                 </thead>
                 <tbody>
                   {newsList?.map((news) => (
-                    <tr key={news.id}>
+                    <tr
+                      key={news.id}
+                      className={`${news.id === id ? "editModeBorder" : ""}`}
+                    >
                       <td className="description">
-                        <span className="m-0">{news.newstitle}</span>
+                        <span className="m-0">{news.newstitle} </span>
                       </td>
                       <td className="description">
                         <p className="m-0">{news.description}</p>

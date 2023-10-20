@@ -26,11 +26,14 @@ const Cost = ({ images, pdfs }) => {
         customUI: ({ onClose }) => {
           return (
             <DeleteDialog
-              title={"We need some your personal details to download PDF's"}
               onClose={onClose}
               callback={navigateTocontactus}
               label={"to Download PDF's"}
+              message={
+                "We need some of your personal details to download PDF's"
+              }
               buttonStyle={"btn-success"}
+              title={" "}
             />
           );
         },

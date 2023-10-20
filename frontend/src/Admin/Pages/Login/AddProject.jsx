@@ -52,8 +52,7 @@ const AddProject = () => {
   const [userName, setUserName] = useState("");
   const [projectTitleErrorMessage, setProjectTitleErrorMessage] = useState("");
   const [projectPublish, setProjectPublish] = useState(false);
-
-  const [tempFile, setTempFile] = useState();
+  const [saveState, setSaveState] = useState(false);
 
   const { id } = useParams();
 
@@ -492,6 +491,7 @@ const AddProject = () => {
               <div>
                 <Button
                   type="submit"
+                  disabled={saveState}
                   cssClass="btn btn-success mx-2"
                   label={id ? "Update Project" : "Save Project"}
                   handlerChange={saveProject}
@@ -725,6 +725,7 @@ const AddProject = () => {
                       validTypes="application/pdf"
                       descriptionTitle="PDF Description"
                       showDescription={false}
+                      saveState={setSaveState}
                       buttonLable="Upload PDF"
                     />
                     <CatageoryImgC
@@ -750,6 +751,7 @@ const AddProject = () => {
                       validTypes="image/png,image/jpeg,application/pdf"
                       descriptionTitle="Plan Description"
                       showDescription={false}
+                      saveState={setSaveState}
                       buttonLable="Upload Plan"
                     />
                     <CatageoryImgC
@@ -775,6 +777,7 @@ const AddProject = () => {
                       validTypes="image/png,image/jpeg,application/pdf"
                       descriptionTitle="Available Description"
                       showDescription={false}
+                      saveState={setSaveState}
                       buttonLable="Upload Availability"
                     />
                     <CatageoryImgC
@@ -801,6 +804,7 @@ const AddProject = () => {
                       validTypes="image/png,image/jpeg,application/pdf"
                       descriptionTitle="Price Description"
                       showDescription={false}
+                      saveState={setSaveState}
                       buttonLable="Upload Price Details"
                     />
                     <CatageoryImgC
@@ -887,6 +891,7 @@ const AddProject = () => {
                     galleryState={imgGallery}
                     validTypes="image/png,image/jpeg"
                     descriptionTitle="Image Description"
+                    saveState={setSaveState}
                     showDescription={true}
                   />
                   <CatageoryImgC
@@ -916,6 +921,7 @@ const AddProject = () => {
               /> */}
               <Button
                 type="submit"
+                disabled={saveState}
                 cssClass="btn btn-success mx-2"
                 label={id ? "Update Project" : "Save Project"}
                 handlerChange={saveProject}

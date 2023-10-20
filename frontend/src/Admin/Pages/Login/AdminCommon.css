@@ -5,3 +5,6 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+.editModeBorder {
+  border: 2px solid #0098da;
+}

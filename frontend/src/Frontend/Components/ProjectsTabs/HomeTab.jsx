@@ -32,11 +32,14 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
         customUI: ({ onClose }) => {
           return (
             <DeleteDialog
-              title={"We need some your personal details to download PDF's"}
               onClose={onClose}
               callback={navigateTocontactus}
               label={"to Download PDF's"}
               buttonStyle={"btn-success"}
+              message={
+                "We need some of your personal details to download PDF's"
+              }
+              title={" "}
             />
           );
         },

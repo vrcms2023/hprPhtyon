@@ -25,6 +25,7 @@ const FileUpload = ({
   category,
   gallerysetState,
   galleryState,
+  saveState,
   validTypes,
   disabledFile = false,
   descriptionTitle,
@@ -66,6 +67,7 @@ const FileUpload = ({
 
   const uploadFile = async () => {
     const arrURL = [];
+    saveState(true);
 
     files.forEach((element, index) => {
       let formData = new FormData();
@@ -105,6 +107,7 @@ const FileUpload = ({
 
     gallerysetState([...galleryState, ...imgarr]);
     setimageDescription("");
+    saveState(false);
     setFiles([]);
   };
 
