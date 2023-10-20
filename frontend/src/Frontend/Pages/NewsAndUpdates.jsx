@@ -18,12 +18,16 @@ const NewsAndUpdates = () => {
 
   useEffect(() => {
     const getNews = async () => {
+      try{
       const response = await axiosClientServiceApi.get(
         `/appNews/clientAppNews/`,
       );
       if (response?.status == 200) {
         setNews(response.data.appNews);
       }
+    }catch(error){
+      console.log("unable to access ulr because of server is down")
+    }
     };
     getNews();
   }, []);

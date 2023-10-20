@@ -22,6 +22,7 @@ const Contact = () => {
   const [mesg, setMesg] = useState("");
   const [show, setShow] = useState(false);
   const [formerror, setFormerror] = useState({});
+  const [success, setsuccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const Contact = () => {
   }, []);
 
   const handleChange = (event) => {
+    setsuccess(false)
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     setFormerror((prevFormData) => ({ ...prevFormData, [name]: "" }));
@@ -52,6 +54,7 @@ const Contact = () => {
         setCookie("clientInformation", formData.email, { maxAge: 86400 });
         setFormData(formObject);
         setFormerror("");
+        setsuccess(true)
       } else {
         toast.error("unable to process your request");
       }
@@ -130,14 +133,13 @@ const Contact = () => {
           </div>
 
           <div className="col-md-8 d-flex justify-content-center align-items-center flex-column">
-            {/* {show && (
+            {success && (
               <Alert
-                mesg={mesg}
-                cssClass={`alert text-white w-75 mt-3 p-2 text-center ${
-                  mesg === "Success" ? "bg-success" : "bg-danger"
-                }`}
+                mesg={'Thank you for contact us'}
+                cssClass={`alert text-white w-75 mt-3 p-2 text-center bg-success`}
               />
-            )} */}
+            )}
+     
             <form
               className="my-2 py-3 py-md-5 contactForm"
               onSubmit={onFormSubmit}

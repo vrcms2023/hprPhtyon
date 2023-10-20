@@ -63,6 +63,7 @@ function App() {
     "/addproject",
     "/testimonial",
     "/contactUSList",
+    "/userAdmin"
   ];
   let isHideMenu =
     pathList.indexOf(window.location.pathname) >= 0 ? true : false;
