@@ -30,7 +30,7 @@ const Contact = () => {
   }, []);
 
   const handleChange = (event) => {
-    setsuccess(false)
+    setsuccess(false);
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     setFormerror((prevFormData) => ({ ...prevFormData, [name]: "" }));
@@ -54,7 +54,7 @@ const Contact = () => {
         setCookie("clientInformation", formData.email, { maxAge: 86400 });
         setFormData(formObject);
         setFormerror("");
-        setsuccess(true)
+        setsuccess(true);
       } else {
         toast.error("unable to process your request");
       }
@@ -122,11 +122,11 @@ const Contact = () => {
               <Title title="Email Id" cssClass="" />
               <p>
                 <a
-                  href="mailto:contact@hprinfraprojects.com"
+                  href="mailto:hprinfrallp@gmail.com"
                   className="fs-6 text-white"
                 >
                   {" "}
-                  contact@hprinfraprojects.com
+                  hprinfrallp@gmail.com
                 </a>
               </p>
             </div>
@@ -135,11 +135,11 @@ const Contact = () => {
           <div className="col-md-8 d-flex justify-content-center align-items-center flex-column">
             {success && (
               <Alert
-                mesg={'Thank you for contact us'}
+                mesg={"Thank you for contact us"}
                 cssClass={`alert text-white w-75 mt-3 p-2 text-center bg-success`}
               />
             )}
-     
+
             <form
               className="my-2 py-3 py-md-5 contactForm"
               onSubmit={onFormSubmit}

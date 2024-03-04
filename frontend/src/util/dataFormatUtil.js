@@ -25,10 +25,11 @@ export const dataFormatedByCatergoryName = (data) => {
 };
 
 export const getImagesByDate = (img) => {
+  if (img.lenght === 0) return false;
   const imgByDate = [];
   const sortedImageArray = img.sort(
     (a, b) =>
-      new moment(b.updated_at).valueOf() - new moment(a.updated_at).valueOf(),
+      new moment(b.updated_at).valueOf() - new moment(a.updated_at).valueOf()
   );
   sortedImageArray.map((img) => {
     const dt = new moment(img.updated_at).format("YYYY/DD/MM");

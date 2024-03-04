@@ -41,6 +41,18 @@ const About = () => {
             />
             <Title title="About HPR Infra" cssClass="text-dark fs-4" />
             <p>
+              Established in 2003 by our visionary Managing Director, D. Hari
+              Srinivas, HPR Infra has been at the forefront of transforming the
+              real estate landscape in Hyderabad. With a commitment to
+              excellence and innovation, our journey began with a vision to
+              create not just homes but enduring legacies. Over the years, we
+              have completed numerous successful projects. As we continue to
+              evolve, our dedication remains unwavering – shaping spaces that
+              resonate with the aspirations and dreams of our valued customers.
+              Join us in celebrating over a decade of excellence and trust with
+              HPR Infra.
+            </p>
+            {/* <p>
               HPR has ventured in the real estate world with a humble beginning
               in the year 2004, with Director D. Hari Srinivas who has vision
               and has successfully completed several projects in Hyderabad.
@@ -93,7 +105,7 @@ const About = () => {
               The ITIR project announced by the Central Govt. is expected to
               further fuel the growth in this area. News related to this project
               can be viewed in the links provided below.
-            </p>
+            </p> */}
           </div>
           <div className="col-12 col-md-4 d-none d-md-block p-0 ">
             <img
@@ -122,17 +134,17 @@ const About = () => {
             />
             <Title title="Our Vision" cssClass="text-dark fs-4" />
             <p>
-              Our vision and intent now encompass to not just build better homes
-              or offices, but to provide a better quality of life for people who
-              are a part of any facility which the Group has created. The focus
-              is to strive to impart better quality through the development of
-              world-class neighborhoods, which will enrich the lives of anyone
-              living or working within these self-contained environs.
+              At HPR Infra, our vision is to be the beacon of innovation and
+              excellence in the real estate landscape, setting new standards for
+              modern living in Hyderabad and beyond.With a legacy built on
+              trust, integrity, and forward-thinking, HPR Infra is dedicated to
+              shaping the future, where every project becomes a testament to our
+              commitment to creating spaces that inspire and endure.
             </p>
           </div>
         </div>
 
-        <div className="row shadow-lg ">
+        {/* <div className="row shadow-lg ">
           <div className="col-12 col-md-8 py-4 p-md-5">
             <img
               src={Img3}
@@ -166,7 +178,7 @@ const About = () => {
               style={{ objectFit: "cover", backgroundPosition: "center" }}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

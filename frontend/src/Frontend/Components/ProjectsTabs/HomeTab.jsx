@@ -49,7 +49,7 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
 
   return (
     <div className="py-5">
-      <Title title={projectTitle} cssClass="" />
+      <Title title={aboutstitle} cssClass="" />
       <Title title={aboutussubtitle} cssClass="fs-6 text-dark" />
       <div className="py-3">{description}</div>
       <p className="text-end">
@@ -88,7 +88,7 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
               ? `${baseURL}${projectImages[0].imgs[0].path}`
               : HomeImg
           }
-          className="rounded img-fluid w-50"
+          className="rounded img-fluid"
           alt="..."
         />
       </div>
