@@ -5,12 +5,17 @@
 /.pnp
 .pnp.js
 /public/uploads
-
+/backend/media/
+/backend/build/
+/frontend/build/
 # testing
 /coverage
 
 # production
-/build
+/build/
+/media/
+__pycache__
+migrations
 
 # misc
 .DS_Store
@@ -18,6 +23,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+
 
 npm-debug.log*
 yarn-debug.log*
