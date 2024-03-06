@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "../../../Common/Title";
 import HomeImg from "../../../Images/project1.png";
 import { getCookie, setCookie, removeCookie } from "../../../util/cookieUtil";
@@ -7,8 +7,13 @@ import { getBaseURL } from "../../../util/ulrUtil";
 
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
+import Model from "../../../Common/Model";
+import ModelBg from "../../../Common/ModelBg";
+import ContactModel from "../../../Common/contactModel";
 
 const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
+  const [show, setShow] = useState(false);
+
   const navigate = useNavigate();
   // console.log("home tab", projectImages[0].imgs[0])
   const { aboutstitle, aboutussubtitle, description, projectTitle } = project;
@@ -47,7 +52,15 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
     }
   };
 
+  const showModel = () => {
+    setShow(!show);
+  };
+  const closeModel = () => {
+    setShow(!show);
+  };
+
   return (
+    <>
     <div className="py-5">
       <Title title={aboutstitle} cssClass="" />
       <Title title={aboutussubtitle} cssClass="fs-6 text-dark" />
@@ -58,7 +71,8 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
               <span
                 key={i}
                 className="d-block my-3 cursorPointer"
-                onClick={() => downloadPDF(pdf.path, pdf.originalname)}
+                // onClick={() => downloadPDF(pdf.path, pdf.originalname)}
+                onClick={showModel}
               >
                 <span className="text-dark me-2" download>
                   {" "}
@@ -93,6 +107,12 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
         />
       </div>
     </div>
+
+    {show && (
+      <ContactModel closeModel={closeModel} />
+      )}
+      {show && <ModelBg />}
+    </>
   );
 };
 
