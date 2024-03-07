@@ -29,6 +29,7 @@ const ProjectTabs = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [isProjectImg, setIsProjectImg] = useState(false);
 
+  const [thumbImgs, setThumbImgs] = useState([]);
   const [pricePdfs, setPricePdfs] = useState([]);
   const [priceImgs, setPriceImgs] = useState([]);
 
@@ -64,6 +65,7 @@ const ProjectTabs = () => {
         filtersImgPdfs(projectData, "price");
         filtersImgPdfs(projectData, "plan");
         filtersImgPdfs(projectData, "avl");
+        filtersImgPdfs(projectData, "thumbnail");
         setSpecifications(projectData?.specificationData);
       }
     } catch (error) {
@@ -113,6 +115,12 @@ const ProjectTabs = () => {
 
       const pdfs = filterPdfs(avlImgs);
       setAvlPdfs(pdfs);
+    }
+
+    if (type === "thumbnail") {
+      const thumbImgs = filterCategory(data, "thumbnail");
+      const images = filterImages(thumbImgs);
+      setThumbImgs(images);
     }
   };
 
@@ -314,9 +322,8 @@ const ProjectTabs = () => {
               >
                 <HomeTab
                   project={projectHome}
-                  projectImages={projectImages}
+                  thumbImgs={thumbImgs}
                   pdfs={pdfs}
-                  isProjectImg={isProjectImg}
                 />
               </div>
               {isProjectImg ? (
