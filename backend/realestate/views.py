@@ -254,7 +254,7 @@ class ClientProjectAPIView(APIView):
       
         snippets = self.get_object()
         projectList = ProjectsSerializer(snippets, many=True)
-        query_set = Gallery.objects.filter(category='images')
+        query_set = Gallery.objects.filter(category='thumbnail')
         data = self.gallery_serializer_class(query_set, many=True).data
             
         return Response({"projectList" : projectList.data, "imageList": data}, status=status.HTTP_200_OK)
