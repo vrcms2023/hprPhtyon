@@ -11,13 +11,13 @@ import Model from "../../../Common/Model";
 import ModelBg from "../../../Common/ModelBg";
 import ContactModel from "../../../Common/contactModel";
 
-const HomeTab = ({ project, projectImages, thumbImgs, pdfs, isProjectImg }) => {
+const HomeTab = ({ project, thumbImgs, pdfs }) => {
   const [show, setShow] = useState(false);
   const [pathName, setPathName] = useState("");
   const [fileName, setFileName] = useState("");
 
   const navigate = useNavigate();
-  // console.log("home tab", projectImages[0].imgs[0])
+
   const { aboutstitle, aboutussubtitle, description, projectTitle } = project;
 
   const baseURL = getBaseURL();

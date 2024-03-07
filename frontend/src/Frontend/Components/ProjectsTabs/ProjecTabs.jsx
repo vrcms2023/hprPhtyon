@@ -322,10 +322,8 @@ const ProjectTabs = () => {
               >
                 <HomeTab
                   project={projectHome}
-                  projectImages={projectImages}
                   thumbImgs={thumbImgs}
                   pdfs={pdfs}
-                  isProjectImg={isProjectImg}
                 />
               </div>
               {isProjectImg ? (
