@@ -60,6 +60,13 @@ INSTALLED_APPS = [
     'testimonials',
     'appNews',
     'contactus',
+    'HomePage',
+    'caseStudies',
+    'bannerAndIntro',
+    'aboutusPage',
+    'servicePage',
+    'careers',
+    'footer',
     'debug_toolbar',
 ]
 

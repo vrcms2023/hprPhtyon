@@ -49,9 +49,9 @@ const Footer = () => {
                 <strong className="fs-5">Email</strong>
                 <br />
                 <abbr title="Phone">E:</abbr>{" "}
-                <a href="mailto:contact@hprinfra.com.com" className="text-dark">
+                <a href="mailto:hprinfrallp@gmail.com" className="text-dark">
                   {" "}
-                  contact@contact@hprinfra.com
+                  hprinfrallp@gmail.com
                 </a>
               </address>
             </div>
@@ -74,6 +74,14 @@ const Footer = () => {
                   className="ms-0"
                 >
                   Google Plus
+                </Link>{" "}
+                <br />
+                <Link
+                  to="https://www.instagram.com/hpr_infra/"
+                  target="_blank"
+                  className="ms-0"
+                >
+                  Instagram
                 </Link>
               </address>
             </div>
@@ -126,6 +134,7 @@ const Footer = () => {
           privacy={privacyPolacyObj}
           closeModel={closeModel}
           flag="footer"
+          obj={""}
         />
       )}
       {show && <ModelBg />}

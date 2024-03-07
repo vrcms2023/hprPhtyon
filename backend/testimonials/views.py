@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from .models import Testimonials
 from .serializers import TestimonialsSerializer
 from rest_framework import generics, permissions

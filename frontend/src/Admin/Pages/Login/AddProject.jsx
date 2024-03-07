@@ -209,10 +209,10 @@ const AddProject = () => {
         };
         setAboutUs(aboutus);
         setPercentValue(
-          project.percentValue ? JSON.parse(project.percentValue) : null,
+          project.percentValue ? JSON.parse(project.percentValue) : null
         );
         setProjectPublish(
-          project.publish ? JSON.parse(project.publish) : false,
+          project.publish ? JSON.parse(project.publish) : false
         );
         setShow(true);
       } else {
@@ -232,10 +232,11 @@ const AddProject = () => {
       projectTitle: projectName,
       updated_By: userName,
       percentValue: percentValue,
+      publish: projectPublish,
     };
     const basicProjectDetails = axiosServiceApi.put(
       `/project/editProject/${newProject.id}/`,
-      basicDetail,
+      basicDetail
     );
 
     const amenitiesData = {
@@ -251,12 +252,12 @@ const AddProject = () => {
     if (amenities.id === "") {
       amenitiesDeatils = axiosServiceApi.post(
         `/project/amenities/`,
-        amenitiesData,
+        amenitiesData
       );
     } else {
       amenitiesDeatils = axiosServiceApi.put(
         `/project/getAmenitiesById/${newProject.id}/`,
-        amenitiesData,
+        amenitiesData
       );
     }
 
@@ -290,14 +291,14 @@ const AddProject = () => {
     if (listOfnewSpecifications.length > 0) {
       newspecification = axiosServiceApi.post(
         `/project/specification/`,
-        listOfnewSpecifications,
+        listOfnewSpecifications
       );
       url.push(newspecification);
     }
     if (listOfexitSpecifications.length > 0) {
       exitSpecification = axiosServiceApi.put(
         `/project/updatespecification/${newProject.id}/`,
-        listOfexitSpecifications,
+        listOfexitSpecifications
       );
       url.push(exitSpecification);
     }
@@ -341,13 +342,13 @@ const AddProject = () => {
       };
       const response = await axiosServiceApi.patch(
         `/project/publishProject/${newProject.id}/`,
-        data,
+        data
       );
       if (response.status === 200) {
         const publisher = JSON.parse(response.data.project.publish);
         setProjectPublish(publisher);
         toast.success(
-          `${readOnlyTitle} ${publisher ? "published" : "unPublished"}`,
+          `${readOnlyTitle} ${publisher ? "published" : "unPublished"}`
         );
       }
     };
@@ -892,7 +893,7 @@ const AddProject = () => {
                     validTypes="image/png,image/jpeg"
                     descriptionTitle="Image Description"
                     saveState={setSaveState}
-                    showDescription={true}
+                    showDescription={false}
                   />
                   <CatageoryImgC
                     title={`${readOnlyTitle} Image Gallery`}

@@ -13,7 +13,7 @@ const Projects = () => {
   const [future, setFuture] = useState([]);
   const [ongoing, setOngoing] = useState([]);
   const { clientProjects, error } = useSelector(
-    (state) => state.clientProjects,
+    (state) => state.clientProjects
   );
   const dispatch = useDispatch();
 
@@ -42,11 +42,11 @@ const Projects = () => {
       </div>
 
       {/* Introduction */}
-      <BriefIntro title="Welcome To HPR Infra Projects">
+      {/* <BriefIntro title="Welcome To HPR Infra Projects">
         We believe that construction is a man made wonder. The thought of
         bringing imagination to real life structures excites us, each day the
         passion in us grows as we contribute to this industry.
-      </BriefIntro>
+      </BriefIntro> */}
 
       {ongoing?.length > 0 ? (
         <ProjectItem projectList={ongoing} projectType={ongoing} />

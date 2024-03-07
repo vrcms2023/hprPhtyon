@@ -12,6 +12,7 @@ import imgFuture from "../../Images/future.png";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import Testimonials from "../Components/Testimonials";
 import { removeActiveClass } from "../../util/ulrUtil";
+import BriefIntro from "../../Common/BriefIntro";
 
 const Home = () => {
   const [testimonis, setTestmonis] = useState([]);
@@ -22,16 +23,15 @@ const Home = () => {
 
   useEffect(() => {
     const getTestimonial = async () => {
-
-      try{
-          const response = await axiosClientServiceApi.get(
-            `/testimonials/clientTestimonials/`,
-          );
-          if (response?.status == 200) {
-            setTestmonis(response.data.testimonial);
-          }
-      } catch(e){
-        console.log("unable to access ulr because of server is down")
+      try {
+        const response = await axiosClientServiceApi.get(
+          `/testimonials/clientTestimonials/`
+        );
+        if (response?.status == 200) {
+          setTestmonis(response.data.testimonial);
+        }
+      } catch (e) {
+        console.log("unable to access ulr because of server is down");
       }
     };
     getTestimonial();
@@ -46,19 +46,31 @@ const Home = () => {
       </div>
 
       {/* Introduction */}
-      <div className="row py-3 introGrayBg">
-        <div className="col-md-8 offset-md-2 px-4 py-2 py-md-4">
+      <BriefIntro title="To excel in delivery of work!">
+      Welcome to HPR Infra – your trusted real estate partner in
+            Hyderabad! With decades of experience, we've successfully completed
+            multiple open plot layouts and a signature apartment construction.
+            Explore with confidence, as we remain committed to shaping not just
+            projects but legacies. Join us in building your dreams with HPR
+            Infra, where tradition meets innovation in the heart of Hyderabad.
+      </BriefIntro>
+
+      {/* <div className="row py-3 introGrayBg">
+        <div className="col-md-10 offset-md-1 px-4 py-2 py-md-4">
           <Title
             title="To excel in delivery of work!"
             cssClass="mb-2 fw-normal fs-2 text-center green-700"
           />
           <p className="text-center lh-md m-0">
-            We believe that construction is a man made wonder. The thought of
-            bringing imagination to real life structures excites us, each day
-            the passion in us grows as we contribute to this industry.
+            Welcome to HPR Infra – your trusted real estate partner in
+            Hyderabad! With decades of experience, we've successfully completed
+            multiple open plot layouts and a signature apartment construction.
+            Explore with confidence, as we remain committed to shaping not just
+            projects but legacies. Join us in building your dreams with HPR
+            Infra, where tradition meets innovation in the heart of Hyderabad.
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Project Cards */}
       <div className="row my-5 homeProjectsBg">
@@ -73,12 +85,17 @@ const Home = () => {
                     alt="Ongoing Projects"
                   />
                   <div className="card-body">
-                    <Title title="Working Projects" cssClass="blue-900" />
+                    <Title title="Ongoing Projects" cssClass="blue-900" />
                     <p className="card-text mb-4">
-                      We believe that construction is a man made wonder. The
-                      thought of bringing imagination to real life structures
-                      excites us, each day the passion in us grows as we
-                      contribute to this industry.
+                      At HPR Infra, innovation meets excellence as we craft
+                      spaces that reflect our commitment to quality and
+                      contemporary design. With projects seamlessly blending
+                      into the city's dynamic landscape, each development is a
+                      testament to our dedication to creating not just
+                      structures, but vibrant communities. Join us on this
+                      journey towards the future of real estate, where HPR Infra
+                      is shaping the skyline and your dreams. Discover ongoing
+                      excellence with us!
                     </p>
                     <Link to="/projects">
                       Continue{" "}
@@ -108,15 +125,19 @@ const Home = () => {
                   />
                   <div className="card-body">
                     <Title
-                      title="Future Projects"
+                      title="Completed Projects"
                       cssClass="text-white blue-900"
                     />
-                    <p className="card-text mb-4">
-                      We believe that construction is a man made wonder. The
-                      thought of bringing imagination to real life structures
-                      excites us, each day the passion in us grows as we
-                      contribute to this industry.
+                    <p className="card-text mb-5">
+                      Step into the legacy of excellence as we proudly showcase
+                      our successfully completed projects that stand as
+                      testaments to our commitment to quality and innovation in
+                      Hyderabad. From meticulously designed open plot layouts to
+                      signature apartment constructions, each completed
+                      endeavour reflects the essence of HPR Infra's dedication
+                      to crafting not just structures, but thriving communities.
                     </p>
+                    <br />
                     <Link to="/projects">
                       Continue{" "}
                       <svg
@@ -144,12 +165,18 @@ const Home = () => {
                     alt="Future Projects"
                   />
                   <div className="card-body">
-                    <Title title="Completed Projects" cssClass="blue-900" />
+                    <Title title="Future Projects" cssClass="blue-900" />
                     <p className="card-text mb-4">
-                      We believe that construction is a man made wonder. The
-                      thought of bringing imagination to real life structures
-                      excites us, each day the passion in us grows as we
-                      contribute to this industry.
+                      Welcome to HPR Infra, a beacon of innovation in
+                      Hyderabad's real estate landscape. With a legacy of
+                      completing multiple open plot layouts, we now set our
+                      sights on the future. Our upcoming projects redefine
+                      modern living, blending innovation and sustainability for
+                      a dynamic urban experience. Join us as we shape not just
+                      structures but vibrant communities that echo the
+                      aspirations of generations to come. Explore the future of
+                      living with HPR Infra – where innovation meets your
+                      dreams.
                     </p>
                     <Link to="/projects" className="">
                       Continue{" "}
@@ -185,11 +212,14 @@ const Home = () => {
             cssClass="mb-2 fw-normal fs-5 text-center text-black subTitle"
           />
           <p className="text-center text-white lh-md ">
-            In our company, we attain to serve you as best as we can in a timely
-            fashion and with assurance that your needs will be satisfied. From
-            initial site studies, to design, to construction and commissioning,
-            we stand by our clients as technical experts throughout the
-            development cycle.
+            At HPR Infra, our culture is not just a reflection of who we are
+            today, but a compass guiding us towards an inspiring future where
+            creativity, passion, and a shared commitment to excellence drive our
+            success.Our commitment to excellence is ingrained in every aspect of
+            our work, from crafting visionary projects to nurturing lasting
+            relationships. We encourage continuous learning, adaptability, and a
+            forward-thinking mindset, empowering our team to push boundaries and
+            redefine industry standards.
           </p>
         </div>
         <div className="col-md-6">

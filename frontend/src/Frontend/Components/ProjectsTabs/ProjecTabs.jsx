@@ -21,7 +21,7 @@ const ProjectTabs = () => {
   // const [selectedProject, setSelectedProject] = useState(null)
   const [amenities, setAmenities] = useState({});
   const [projectImages, setProjectImages] = useState([]);
-  const [projectHome, setProjectHome] = useState({});
+  const [projectHome, setProjectHome] = useState([]);
   const [specifications, setSpecifications] = useState([]);
   const [pdfs, setPdfs] = useState([]);
   const [planPdfs, setPlanPdfs] = useState([]);
@@ -48,26 +48,27 @@ const ProjectTabs = () => {
 
   const getProjects = async (projectid) => {
     // const {value} = e.target
-    try{
-    const response = await axiosClientServiceApi.get(
-      `/project/getSelectedClientProject/${projectid}/`,
-    );
-    if (response?.status == 200) {
-      const projectData = response.data;
-      setProjectTitle(projectData.project.projectTitle);
-      setprojectid(projectData.project.id);
-      setProjectHome(projectData.project);
-      setAmenities(projectData.amenitie[0]);
-      filtersImgPdfs(projectData, "images");
-      filtersImgPdfs(projectData, "pdfs");
-      filtersImgPdfs(projectData, "price");
-      filtersImgPdfs(projectData, "plan");
-      filtersImgPdfs(projectData, "avl");
-      setSpecifications(projectData?.specificationData);
+    try {
+      const response = await axiosClientServiceApi.get(
+        `/project/getSelectedClientProject/${projectid}/`
+      );
+      if (response?.status == 200) {
+        const projectData = response.data;
+        const project = projectData.project[0];
+        setProjectTitle(project?.projectTitle);
+        setprojectid(project?.id);
+        setProjectHome(project);
+        setAmenities(projectData.amenitie[0]);
+        filtersImgPdfs(projectData, "images");
+        filtersImgPdfs(projectData, "pdfs");
+        filtersImgPdfs(projectData, "price");
+        filtersImgPdfs(projectData, "plan");
+        filtersImgPdfs(projectData, "avl");
+        setSpecifications(projectData?.specificationData);
+      }
+    } catch (error) {
+      console.log("unable to access ulr because of server is down");
     }
-  }catch(error){
-    console.log("unable to access ulr because of server is down")
-  }
   };
 
   const filtersImgPdfs = (proj, type) => {
@@ -123,7 +124,7 @@ const ProjectTabs = () => {
       (item) =>
         item.contentType === ".jpg" ||
         item.contentType === ".jpeg" ||
-        item.contentType === ".png",
+        item.contentType === ".png"
     );
   };
 
