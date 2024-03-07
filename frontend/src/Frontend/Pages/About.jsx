@@ -144,6 +144,57 @@ const About = () => {
           </div>
         </div>
 
+        <Title title="Our Partners" cssClass="text-dark fs-4 text-center py-4 " />
+
+        <div className="row shadow-lg my-3">
+          
+          <div className="col-md-4 py-4 p-md-5">
+            <img
+              src={Img2}
+              alt=""
+              className="w-100 mb-3 shadow-md rounded-2"
+            />
+            <Title title="Our Vision" cssClass="text-dark fs-4" />
+            <p>
+              At HPR Infra, our vision is to be the beacon of innovation and
+              excellence in the real estate landscape, setting new standards for
+              modern living in Hyderabad and beyond.With a legacy built on
+              trust, integrity, and forward-thinking
+            </p>
+          </div>
+          
+
+          <div className="col-md-4  py-4 p-md-5">
+            <img
+              src={Img2}
+              alt=""
+              className="w-100 mb-3 shadow-md rounded-2"
+            />
+            <Title title="Our Vision" cssClass="text-dark fs-4" />
+            <p>
+              At HPR Infra, our vision is to be the beacon of innovation and
+              excellence in the real estate landscape, setting new standards for
+              modern living in Hyderabad and beyond.With a legacy built on
+              trust, integrity, and forward-thinking
+            </p>
+          </div>
+
+          <div className="col-md-4  py-4 p-md-5">
+            <img
+              src={Img2}
+              alt=""
+              className="w-100 mb-3 shadow-md rounded-2"
+            />
+            <Title title="Our Vision" cssClass="text-dark fs-4" />
+            <p>
+              At HPR Infra, our vision is to be the beacon of innovation and
+              excellence in the real estate landscape, setting new standards for
+              modern living in Hyderabad and beyond.With a legacy built on
+              trust, integrity, and forward-thinking
+            </p>
+          </div>
+        </div>
+
         {/* <div className="row shadow-lg ">
           <div className="col-12 col-md-8 py-4 p-md-5">
             <img

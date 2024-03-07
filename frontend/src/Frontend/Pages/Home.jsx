@@ -12,6 +12,7 @@ import imgFuture from "../../Images/future.png";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import Testimonials from "../Components/Testimonials";
 import { removeActiveClass } from "../../util/ulrUtil";
+import BriefIntro from "../../Common/BriefIntro";
 
 const Home = () => {
   const [testimonis, setTestmonis] = useState([]);
@@ -45,8 +46,17 @@ const Home = () => {
       </div>
 
       {/* Introduction */}
-      <div className="row py-3 introGrayBg">
-        <div className="col-md-8 offset-md-2 px-4 py-2 py-md-4">
+      <BriefIntro title="To excel in delivery of work!">
+      Welcome to HPR Infra – your trusted real estate partner in
+            Hyderabad! With decades of experience, we've successfully completed
+            multiple open plot layouts and a signature apartment construction.
+            Explore with confidence, as we remain committed to shaping not just
+            projects but legacies. Join us in building your dreams with HPR
+            Infra, where tradition meets innovation in the heart of Hyderabad.
+      </BriefIntro>
+
+      {/* <div className="row py-3 introGrayBg">
+        <div className="col-md-10 offset-md-1 px-4 py-2 py-md-4">
           <Title
             title="To excel in delivery of work!"
             cssClass="mb-2 fw-normal fs-2 text-center green-700"
@@ -60,7 +70,7 @@ const Home = () => {
             Infra, where tradition meets innovation in the heart of Hyderabad.
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Project Cards */}
       <div className="row my-5 homeProjectsBg">
