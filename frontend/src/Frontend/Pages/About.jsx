@@ -4,7 +4,6 @@ import BriefIntro from "../../Common/BriefIntro";
 
 import Img1 from "../../Images/project1.png";
 import Img2 from "../../Images/future.png";
-import Img3 from "../../Images/quality.png";
 
 import "./About.css";
 import { removeActiveClass } from "../../util/ulrUtil";
@@ -144,37 +143,29 @@ const About = () => {
           </div>
         </div>
 
-        <Title title="Our Partners" cssClass="text-dark fs-3 pt-3" style={{color: "#285992"}} />
+        <Title
+          title="Our Partners"
+          cssClass="text-dark fs-3 pt-3"
+          style={{ color: "#285992" }}
+        />
 
-        <div className="row shadow-lg my-3" style={{background: "#91d8f7"}}
-        >
-          
+        <div className="row shadow-lg my-3" style={{ background: "#91d8f7" }}>
           <div className="col-md-4 py-4 p-md-5">
             {/* <img
               src={Img2}
               alt=""
               className="w-100 mb-3 shadow-md rounded-2"
             /> */}
-            <Title title="Mr. Divvela Hari Srinivas" cssClass="text-dark fs-4 fw-bold mb-3" />
+            <Title
+              title="Mr. Divvela Hari Srinivas"
+              cssClass="text-dark fs-4 fw-bold mb-3"
+            />
             <p className="text-black">
-              Mr. Divvela Hari Srinivas, aged about 53 years, he is a Graduate in B Tech with over 20 years of experience in Infrastructure and Real Estate Sector. He has a rich experience in Market Analysis. 
-
-              Mr. Divvela Hari Srinivas is a Managing Partner in M/s HPR Infra LLP and M/s HPR Homes LLP.
-            </p>
-          </div>
-          
-
-          <div className="col-md-4  py-4 p-md-5">
-            {/* <img
-              src={Img2}
-              alt=""
-              className="w-100 mb-3 shadow-md rounded-2"
-            /> */}
-            <Title title="Mr. Moluguri Kiran Kumar" cssClass="text-dark fs-4 fw-bold mb-3" />
-            <p className="text-black">
-              Mr. M Kiran Kumar, is a Graduate in B Tech (ECE) and PG in Electrical Engineering with over 7 years of experience in Oracle Applications Development and 10 years of experience as project coordinator and supply chain manager in USA. He has implemented couple of residential layouts in Hyderabad and residential and commercial projects in Banglaore (Pragati Builders).  
-
-              Mr. M Kiran Kumar is a Partner in M/s HPR Infra LLP and M/s HPR Homes LLP.  
+              Mr. Divvela Hari Srinivas, aged about 53 years, he is a Graduate
+              in B Tech with over 20 years of experience in Infrastructure and
+              Real Estate Sector. He has a rich experience in Market Analysis.
+              Mr. Divvela Hari Srinivas is a Managing Partner in M/s HPR Infra
+              LLP and M/s HPR Homes LLP.
             </p>
           </div>
 
@@ -184,11 +175,37 @@ const About = () => {
               alt=""
               className="w-100 mb-3 shadow-md rounded-2"
             /> */}
-            <Title title="Mrs. Beeda Jyothi" cssClass="text-dark fs-4 fw-bold mb-3" />
+            <Title
+              title="Mr. Moluguri Kiran Kumar"
+              cssClass="text-dark fs-4 fw-bold mb-3"
+            />
             <p className="text-black">
-              Mrs. Beeda Jyothi, has over 18 years of experience in marketing, both print and digital media. She has successfully chaired as marketing head for most of the projects of HPR Infra and made them a grand success.  
+              Mr. M Kiran Kumar, is a Graduate in B Tech (ECE) and PG in
+              Electrical Engineering with over 7 years of experience in Oracle
+              Applications Development and 10 years of experience as project
+              coordinator and supply chain manager in USA. He has implemented
+              couple of residential layouts in Hyderabad and residential and
+              commercial projects in Banglaore (Pragati Builders). Mr. M Kiran
+              Kumar is a Partner in M/s HPR Infra LLP and M/s HPR Homes LLP.
+            </p>
+          </div>
 
-              Mrs. Beeda Jyothi is a Designated Partner in M/s HPR Infra LLP and M/s HPR Homes LLP. 
+          <div className="col-md-4  py-4 p-md-5">
+            {/* <img
+              src={Img2}
+              alt=""
+              className="w-100 mb-3 shadow-md rounded-2"
+            /> */}
+            <Title
+              title="Mrs. Beeda Jyothi"
+              cssClass="text-dark fs-4 fw-bold mb-3"
+            />
+            <p className="text-black">
+              Mrs. Beeda Jyothi, has over 18 years of experience in marketing,
+              both print and digital media. She has successfully chaired as
+              marketing head for most of the projects of HPR Infra and made them
+              a grand success. Mrs. Beeda Jyothi is a Designated Partner in M/s
+              HPR Infra LLP and M/s HPR Homes LLP.
             </p>
           </div>
         </div>
