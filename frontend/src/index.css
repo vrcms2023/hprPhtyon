@@ -182,15 +182,16 @@ body {
 
 .banner {
   background-size: cover;
-  background-position: top center;
+  background-position: center;
   height: 400px;
 }
 .newBanner {
-  background-image: url("Images/project-banner.jpg");
+  /* background-image: url("Images/project-banner.jpg"); */
+  background-image: url("Images/Banner_14.jpg");
 }
 
 .projectBanner {
-  background-image: url("Images/Banner_13.jpg");
+  background-image: url("Images/banner_projects.jpg");
 }
 
 .aboutBanner {

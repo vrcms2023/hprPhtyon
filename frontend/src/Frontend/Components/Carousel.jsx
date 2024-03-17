@@ -41,8 +41,8 @@ const Carousel = () => {
             alt="..."
           />
           <div className="carousel-caption d-none d-md-block">
-            <h1 className="text-white fw-bold">HPR INFRA</h1>
-            <p className="text-light fw-normal fs-5">Cognitive Capabilities.</p>
+            <h1 className="text-white fw-bold">Welcome to HPR Infra</h1>
+            <p className="fs-5">Your trusted real estate partner in Hyderabad! With decades of experience</p>
           </div>
         </div>
         <div className="carousel-item">
@@ -53,8 +53,8 @@ const Carousel = () => {
             alt="..."
           />
           <div className="carousel-caption d-none d-md-block">
-            <h1 className="text-white fw-bold">HPR INFRA</h1>
-            <p className="text-light fw-normal fs-5">Cognitive Capabilities.</p>
+            <h1 className="text-white fw-bold">AT HPR Infra</h1>
+            <p className="fs-5">Innovation meets excellence as we craft spaces that reflect our commitment to quality.</p>
           </div>
         </div>
         <div className="carousel-item">
@@ -66,7 +66,7 @@ const Carousel = () => {
           />
           <div className="carousel-caption d-none d-md-block">
             <h1 className="text-white fw-bold">HPR INFRA</h1>
-            <p className="text-light fw-normal fs-5">Cognitive Capabilities.</p>
+            <p className="fs-5">A beacon of innovation in Hyderabad's real estate landscape.</p>
           </div>
         </div>
       </div>
